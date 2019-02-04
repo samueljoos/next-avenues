@@ -1,10 +1,12 @@
-# next-avenues *0.2.0*
+# [next-avenues](https://github.com/samueljoos/next-avenues) *0.2.1*
+
+> A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes
 
 
 ### src/Store.js
 
 
-#### new Store()
+#### new Store() 
 
 Route store is used to store registered routes as an
 array. It is a singleton store to be exported and
@@ -23,7 +25,7 @@ routes.
 
 
 
-#### Store.breakpoint(name)
+#### Store.breakpoint(name) 
 
 Add a breakpoint to routes. All routes after the
 breakpoint will be recorded seperately. Helpful
@@ -38,7 +40,7 @@ Also only one breakpoint at a time is allowed.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `String`  |  | &nbsp; |
+| name | `string`  |  | &nbsp; |
 
 
 
@@ -46,11 +48,11 @@ Also only one breakpoint at a time is allowed.
 ##### Returns
 
 
--
+- `Void`
 
 
 
-#### Store.hasBreakpoint()
+#### Store.hasBreakpoint() 
 
 Returns a boolean indicating whether breakpoint
 is enabled or not.
@@ -63,11 +65,11 @@ is enabled or not.
 ##### Returns
 
 
-- `Boolean`
+- `boolean`  
 
 
 
-#### Store.breakpointRoutes()
+#### Store.breakpointRoutes() 
 
 Returns the routes recorded during
 breakpoint.
@@ -80,11 +82,11 @@ breakpoint.
 ##### Returns
 
 
--
+- `Array`  
 
 
 
-#### Store.releaseBreakpoint()
+#### Store.releaseBreakpoint() 
 
 Release the breakpoint.
 
@@ -96,11 +98,11 @@ Release the breakpoint.
 ##### Returns
 
 
--
+- `Void`
 
 
 
-#### Store.add(route)
+#### Store.add(route) 
 
 Add a route to the store
 
@@ -123,7 +125,7 @@ Add a route to the store
 
 
 
-#### Store.remove(routeToRemove)
+#### Store.remove(routeToRemove) 
 
 Remove route from the store.
 
@@ -142,11 +144,11 @@ Remove route from the store.
 ##### Returns
 
 
--
+- `Void`
 
 
 
-#### Store.clear()
+#### Store.clear() 
 
 Clear all the routes store so far.
 
@@ -158,11 +160,11 @@ Clear all the routes store so far.
 ##### Returns
 
 
--
+- `Void`
 
 
 
-#### Store.find(nameOrRoute, domain)
+#### Store.find(routeNameOrHandler, domain) 
 
 Find a route with name or it's url
 
@@ -173,8 +175,8 @@ Find a route with name or it's url
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| nameOrRoute | `String`  |  | &nbsp; |
-| domain | `String`  |  | &nbsp; |
+| routeNameOrHandler | `string`  |  | &nbsp; |
+| domain | `string`  |  | &nbsp; |
 
 
 
@@ -182,11 +184,11 @@ Find a route with name or it's url
 ##### Returns
 
 
-- `Object` `Null`
+- `Object` `Null`  
 
 
 
-#### Store.list()
+#### Store.list() 
 
 Returns a list of stored routes.
 
@@ -198,7 +200,7 @@ Returns a list of stored routes.
 ##### Returns
 
 
-- `Array`
+- `Array`  
 
 
 

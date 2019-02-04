@@ -33,14 +33,15 @@ class Route {
     }
 
     /**
+     * @description
      * Validates the route to make sure it is a
      * valid string
      *
-     * @method _validateRoute
+     * @function _validateRoute
      *
-     * @param  {String}       route
+     * @param {string} route
      *
-     * @return {void}
+     * @returns {void}
      *
      * @private
      */
@@ -54,15 +55,14 @@ class Route {
     }
 
     /**
+     * @description
      * Instantiate private properties on the route instance
      *
-     * @method _instantiate
+     * @function _instantiate
      *
-     * @param  {String}              route
-     * @param  {Array}               verbs
-     * @param  {Function|String}     handler
-     *
-     * @return {void}
+     * @param  {Router} router
+     * @param  {string} route
+     * @param  {string} page
      *
      * @private
      */
@@ -88,12 +88,11 @@ class Route {
     }
 
     /**
+     * @description
      * Make the regexp pattern for the route. Later this
      * expression is used to match urls.
      *
-     * @method _makeRoutePattern
-     *
-     * @return {void}
+     * @function _makeRoutePattern
      *
      * @private
      */
@@ -103,14 +102,15 @@ class Route {
     }
 
     /**
+     * @description
      * Returns an object of dynamic domains for a given
      * route.
      *
-     * @method _getSubDomains
+     * @function _getSubDomains
      *
-     * @param  {String}       host
+     * @param {string} host
      *
-     * @return {Object|Null}
+     * @returns {Object|Null}
      *
      * @private
      */
@@ -132,14 +132,14 @@ class Route {
     }
 
     /**
+     * @description
      * Define domain for the route. If domain is defined
      * then route will only resolve when domain matches.
      *
-     * @method domain
+     * @function domain
      *
-     * @param  {String}  domain
-     *
-     * @chainable
+     * @param  {string}  domain
+     * @returns {Route}
      *
      * @example
      * Route
@@ -155,15 +155,16 @@ class Route {
     }
 
     /**
+     * @description
      * Define a name as an identifier for your route.
      * The main benefit of using a name is that you can make change the route
      * without having to refactor all your route references.
      *
-     * @method as
+     * @function as
      *
-     * @param  {String} name
+     * @param  {string} name
      *
-     * @chainable
+     * @returns {Route}
      *
      * @example
      * Route
@@ -176,15 +177,15 @@ class Route {
     }
 
     /**
+     * @description
      * Prefix the route with some string.
-     * Generally used by the @ref(Route/group) to prefix
-     * a bunch of routes.
+     * Generally used by the @ref(Route/group) to prefix a bunch of routes.
      *
-     * @method prefix
+     * @function prefix
      *
-     * @param  {String} prefix
+     * @param  {string} prefix
      *
-     * @chainable
+     * @returns {Route}
      *
      * @example
      * Route
@@ -199,16 +200,16 @@ class Route {
     }
 
     /**
+     * @description
      * Associate some static data with a route.
      *
      * Example: This can be handy when you want to create multilingual domain setup.
      *
+     * @function data
      *
-     * @method prefix
+     * @param  {string} data
      *
-     * @param  {String} prefix
-     *
-     * @chainable
+     * @returns {Route}
      *
      * @example
      * const multilingualRoutes = () => {
@@ -223,18 +224,18 @@ class Route {
     }
 
     /**
+     * @description
      * Resolves the url by matching it against
      * the registered route and verbs. It will
      * return an empty object when the url
      * doesn't match to this route.
      *
-     * @method resolve
+     * @function resolve
      *
-     * @param  {String} url
-     * @param  {String} verb
-     * @param  {String} [host] - Required only when route has subdomain
+     * @param  {string} url
+     * @param  {string} host
      *
-     * @return {Object}
+     * @returns {Object}
      */
     resolve(url, host) {
         /**
@@ -273,14 +274,15 @@ class Route {
     }
 
     /**
+     * @description
      * Get an url based on the data and options provided.
      *
-     * @method getUrl
+     * @function getUrl
      *
-     * @param {object} data
-     * @param {object} options
+     * @param {Object} data
+     * @param {Object} options
      *
-     * @return {string}
+     * @returns {string}
      */
     getUrl(data, options) {
         let compiledDomain;
@@ -314,24 +316,29 @@ class Route {
     }
 
     /**
+     * @description
      * Get the Next.js page component name.
      *
-     * @method getPage
+     * @function getPage
      *
-     * @return {String}
+     * @returns {string}
      */
     getPage() {
         return this.page;
     }
 
     /**
+     * @description
      * Get the next/link component props for this route.
      * Generally you don't need this function and it's
      * beter to use the @Ref(Router/Link) component.
      *
-     * @method getPage
+     * @function getNextLinkProps
      *
-     * @return {String}
+     * @param {Object} data
+     * @param {Object} options
+     *
+     * @returns {Object}
      */
     getNextLinkProps(data, options) {
         const url = this.getUrl(data, options);
@@ -348,11 +355,12 @@ class Route {
     }
 
     /**
+     * @description
      * Returns the JSON representation of the route.
      *
-     * @method toJSON
+     * @function toJSON
      *
-     * @return {Object}
+     * @returns {Object}
      */
     toJSON() {
         return {

@@ -1,10 +1,12 @@
-# next-avenues *0.2.0*
+# [next-avenues](https://github.com/samueljoos/next-avenues) *0.2.1*
+
+> A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes
 
 
 ### src/Route.js
 
 
-#### new Route()
+#### new Route() 
 
 This class defines a single route. It supports dynamic
 **url segments** associated **data**
@@ -39,7 +41,7 @@ valid string
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| route | `String`  |  | &nbsp; |
+| route | `string`  |  | &nbsp; |
 
 
 
@@ -47,11 +49,11 @@ valid string
 ##### Returns
 
 
--
+-  
 
 
 
-#### _instantiate(route, verbs, handler)  *private method*
+#### _instantiate(router, route, page)  *private method*
 
 Instantiate private properties on the route instance
 
@@ -62,9 +64,9 @@ Instantiate private properties on the route instance
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| route | `String`  |  | &nbsp; |
-| verbs | `Array`  |  | &nbsp; |
-| handler | `Function` `String`  |  | &nbsp; |
+| router | `Router`  |  | &nbsp; |
+| route | `string`  |  | &nbsp; |
+| page | `string`  |  | &nbsp; |
 
 
 
@@ -72,11 +74,11 @@ Instantiate private properties on the route instance
 ##### Returns
 
 
--
+- `Void`
 
 
 
-#### this._route()
+#### this._route() 
 
 Private properties
 
@@ -92,7 +94,7 @@ Private properties
 
 
 
-#### this.name()
+#### this.name() 
 
 Public properties
 
@@ -121,7 +123,7 @@ expression is used to match urls.
 ##### Returns
 
 
--
+- `Void`
 
 
 
@@ -137,7 +139,7 @@ route.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| host | `String`  |  | &nbsp; |
+| host | `string`  |  | &nbsp; |
 
 
 
@@ -145,11 +147,11 @@ route.
 ##### Returns
 
 
-- `Object` `Null`
+- `Object` `Null`  
 
 
 
-#### domain(domain)
+#### domain(domain) 
 
 Define domain for the route. If domain is defined
 then route will only resolve when domain matches.
@@ -161,7 +163,7 @@ then route will only resolve when domain matches.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| domain | `String`  |  | &nbsp; |
+| domain | `string`  |  | &nbsp; |
 
 
 
@@ -178,11 +180,11 @@ Route
 ##### Returns
 
 
-- `Void`
+- `Route`  
 
 
 
-#### as(name)
+#### as(name) 
 
 Define a name as an identifier for your route.
 The main benefit of using a name is that you can make change the route
@@ -195,7 +197,7 @@ without having to refactor all your route references.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `String`  |  | &nbsp; |
+| name | `string`  |  | &nbsp; |
 
 
 
@@ -212,15 +214,14 @@ Route
 ##### Returns
 
 
-- `Void`
+- `Route`  
 
 
 
-#### prefix(prefix)
+#### prefix(prefix) 
 
 Prefix the route with some string.
-Generally used by the [@ref(]Route/group) to prefix
-a bunch of routes.
+Generally used by the @ref(Route/group) to prefix a bunch of routes.
 
 
 
@@ -229,7 +230,7 @@ a bunch of routes.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| prefix | `String`  |  | &nbsp; |
+| prefix | `string`  |  | &nbsp; |
 
 
 
@@ -246,11 +247,11 @@ Route
 ##### Returns
 
 
-- `Void`
+- `Route`  
 
 
 
-#### data(prefix)
+#### data(data) 
 
 Associate some static data with a route.
 
@@ -263,7 +264,7 @@ Example: This can be handy when you want to create multilingual domain setup.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| prefix | `String`  |  | &nbsp; |
+| data | `string`  |  | &nbsp; |
 
 
 
@@ -282,11 +283,11 @@ router.group(multilingualRoutes).domain('mydutchwebsite.nl').data({lang: 'nl'})
 ##### Returns
 
 
-- `Void`
+- `Route`  
 
 
 
-#### resolve(url, verb[, host])
+#### resolve(url, host) 
 
 Resolves the url by matching it against
 the registered route and verbs. It will
@@ -300,9 +301,8 @@ doesn't match to this route.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| url | `String`  |  | &nbsp; |
-| verb | `String`  |  | &nbsp; |
-| host | `String`  | - Required only when route has subdomain | *Optional* |
+| url | `string`  |  | &nbsp; |
+| host | `string`  |  | &nbsp; |
 
 
 
@@ -310,11 +310,11 @@ doesn't match to this route.
 ##### Returns
 
 
-- `Object`
+- `Object`  
 
 
 
-#### subdomains()
+#### subdomains() 
 
 Check for matching subdomains
 
@@ -330,7 +330,7 @@ Check for matching subdomains
 
 
 
-#### if()
+#### if() 
 
 Nothing needs processing, since the route
 and the url are same.
@@ -347,7 +347,7 @@ and the url are same.
 
 
 
-#### tokens()
+#### tokens() 
 
 Get route tokens if matched otherwise
 return null.
@@ -364,7 +364,7 @@ return null.
 
 
 
-#### getUrl(data, options)
+#### getUrl(data, options) 
 
 Get an url based on the data and options provided.
 
@@ -375,8 +375,8 @@ Get an url based on the data and options provided.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| data | `object`  |  | &nbsp; |
-| options | `object`  |  | &nbsp; |
+| data | `Object`  |  | &nbsp; |
+| options | `Object`  |  | &nbsp; |
 
 
 
@@ -384,11 +384,11 @@ Get an url based on the data and options provided.
 ##### Returns
 
 
-- `string`
+- `string`  
 
 
 
-#### getPage()
+#### getPage() 
 
 Get the Next.js page component name.
 
@@ -400,11 +400,11 @@ Get the Next.js page component name.
 ##### Returns
 
 
-- `String`
+- `string`  
 
 
 
-#### getNextLinkProps()
+#### getNextLinkProps(data, options) 
 
 Get the next/link component props for this route.
 Generally you don't need this function and it's
@@ -413,16 +413,24 @@ beter to use the @Ref(Router/Link) component.
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| data | `Object`  |  | &nbsp; |
+| options | `Object`  |  | &nbsp; |
+
+
 
 
 ##### Returns
 
 
-- `String`
+- `Object`  
 
 
 
-#### toJSON()
+#### toJSON() 
 
 Returns the JSON representation of the route.
 
@@ -434,7 +442,7 @@ Returns the JSON representation of the route.
 ##### Returns
 
 
-- `Object`
+- `Object`  
 
 
 

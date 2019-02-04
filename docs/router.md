@@ -1,10 +1,12 @@
-# next-avenues *0.2.0*
+# [next-avenues](https://github.com/samueljoos/next-avenues) *0.2.1*
+
+> A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes
 
 
 ### src/Router.js
 
 
-#### new Router()
+#### new Router() 
 
 Router is the public interface used to define
 routes, groups and Link components.
@@ -21,18 +23,11 @@ routes, groups and Link components.
 
 
 
-#### Router._initialize(callback)  *private method*
+#### Router._initialize()  *private method*
 
 Initialize the client url location data
 
 
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| callback | `Function`  |  | &nbsp; |
 
 
 
@@ -40,7 +35,7 @@ Initialize the client url location data
 ##### Returns
 
 
--
+-  
 
 
 
@@ -64,7 +59,7 @@ it is a function
 ##### Returns
 
 
--
+- `Void`
 
 
 
@@ -80,11 +75,11 @@ Validates that nested groups are not created.
 ##### Returns
 
 
--
+- `Void`
 
 
 
-#### Router.add(route, page)
+#### Router.add(route, page) 
 
 Creates a new route which resolves to a Next.js page component.
 
@@ -95,8 +90,8 @@ Creates a new route which resolves to a Next.js page component.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| route | `String`  |  | &nbsp; |
-| page | `String`  |  | &nbsp; |
+| route | `string`  |  | &nbsp; |
+| page | `string`  |  | &nbsp; |
 
 
 
@@ -104,11 +99,11 @@ Creates a new route which resolves to a Next.js page component.
 ##### Returns
 
 
-- `Route`
+- `Route`  
 
 
 
-#### Router.match(url, host)
+#### Router.match(url, host) 
 
 Resolves and returns the route that matches given **url** and **host**
 
@@ -123,8 +118,8 @@ static routes.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| url | `String`  |  | &nbsp; |
-| host | `String`  |  | &nbsp; |
+| url | `string`  |  | &nbsp; |
+| host | `string`  |  | &nbsp; |
 
 
 
@@ -132,11 +127,11 @@ static routes.
 ##### Returns
 
 
-- `Object`
+- `Object`  
 
 
 
-#### matchingRoute()
+#### matchingRoute() 
 
 Find the first matching route.
 
@@ -152,7 +147,7 @@ Find the first matching route.
 
 
 
-#### if()
+#### if() 
 
 Return null when unable to find a route.
 
@@ -168,7 +163,7 @@ Return null when unable to find a route.
 
 
 
-#### group([name], callback)
+#### group([name], callback) 
 
 Create a group of routes
 
@@ -179,7 +174,7 @@ Create a group of routes
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `string`  | == null] | *Optional* |
+| name | `string`  |  | *Optional* |
 | callback | `Function`  |  | &nbsp; |
 
 
@@ -197,11 +192,11 @@ routes.group(() => {
 ##### Returns
 
 
-- `Group`
+- `Group`  
 
 
 
-#### group()
+#### group() 
 
 Create a new group and pass all the routes
 to the group.
@@ -218,7 +213,7 @@ to the group.
 
 
 
-#### list()
+#### list() 
 
 Returns an array of all the registered routes
 
@@ -230,11 +225,11 @@ Returns an array of all the registered routes
 ##### Returns
 
 
-- `Array`
+- `Array`  
 
 
 
-#### Link(props)
+#### Link(props) 
 
 Link component for react
 
@@ -245,7 +240,7 @@ Link component for react
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| props | `object`  |  | &nbsp; |
+| props | `Object`  |  | &nbsp; |
 
 
 
@@ -253,11 +248,11 @@ Link component for react
 ##### Returns
 
 
--  React.Element
+- `React.Element`  
 
 
 
-#### getCurrentRoute()
+#### getCurrentRoute() 
 
 Return the current active route.
 This is usualy called inside the getInitialProps a Next.js page component.
@@ -270,11 +265,11 @@ This is usualy called inside the getInitialProps a Next.js page component.
 ##### Returns
 
 
-- `object`
+- `Object`  
 
 
 
-#### getRequestHandler(app, customHandler)
+#### getRequestHandler(app, customHandler) 
 
 Middleware function for your nextjs server setup.
 
@@ -294,7 +289,7 @@ Middleware function for your nextjs server setup.
 ##### Returns
 
 
-- `Void`
+- `Function`  
 
 
 

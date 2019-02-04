@@ -1,10 +1,12 @@
-# next-avenues *0.2.0*
+# [next-avenues](https://github.com/samueljoos/next-avenues) *0.2.1*
+
+> A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes
 
 
 ### src/Group.js
 
 
-#### new Group()
+#### new Group() 
 
 Group class is used to group routes with
 common behavior. For example prefixing a bunch
@@ -26,12 +28,19 @@ class.
 
 
 
-#### as()
+#### as(name) 
 
 Give a name to a group of routes.
 This will prefix all routes name.
 
 
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| name | `string`  |  | &nbsp; |
 
 
 
@@ -48,11 +57,11 @@ router
 ##### Returns
 
 
-- `Void`
+- `Group`  
 
 
 
-#### prefix(prefix)
+#### prefix(prefix) 
 
 Prefix group of routes.
 Also see @ref('Route/prefix')
@@ -64,7 +73,7 @@ Also see @ref('Route/prefix')
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| prefix | `String`  |  | &nbsp; |
+| prefix | `string`  |  | &nbsp; |
 
 
 
@@ -81,11 +90,11 @@ router
 ##### Returns
 
 
-- `Void`
+- `Group`  
 
 
 
-#### domain(domain)
+#### domain(domain) 
 
 Add domain to a group of routes.
 Also see @ref('Route/domain')
@@ -97,7 +106,7 @@ Also see @ref('Route/domain')
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| domain | `String`  |  | &nbsp; |
+| domain | `string`  |  | &nbsp; |
 
 
 
@@ -114,11 +123,11 @@ router
 ##### Returns
 
 
-- `Void`
+- `Group`  
 
 
 
-#### data(data)
+#### data(data) 
 
 Add data to a group of routes.
 Also see @ref('Route/data')
@@ -130,7 +139,7 @@ Also see @ref('Route/data')
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| data | `String`  |  | &nbsp; |
+| data | `string`  |  | &nbsp; |
 
 
 
@@ -147,7 +156,7 @@ router
 ##### Returns
 
 
-- `Void`
+- `Group`  
 
 
 

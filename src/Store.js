@@ -27,17 +27,16 @@ class Store {
     }
 
     /**
+	 * @description
 	 * Add a breakpoint to routes. All routes after the
 	 * breakpoint will be recorded seperately. Helpful
 	 * for @ref(Route/group).
 	 *
 	 * Also only one breakpoint at a time is allowed.
 	 *
-	 * @method breakpoint
+	 * @function breakpoint
 	 *
-	 * @param  {String}   name
-	 *
-	 * @return {void}
+	 * @param {string} name
 	 */
     breakpoint(name = null) {
         this._breakpoint.enabled = true;
@@ -45,35 +44,36 @@ class Store {
     }
 
   	/**
+	   * @description
 	 * Returns a boolean indicating whether breakpoint
 	 * is enabled or not.
 	 *
-	 * @method hasBreakpoint
+	 * @function hasBreakpoint
 	 *
-	 * @return {Boolean}
+	 * @returns {boolean}
 	 */
     hasBreakpoint() {
         return this._breakpoint.enabled;
     }
 
     /**
+	 * @description
 	 * Returns the routes recorded during
 	 * breakpoint.
 	 *
-	 * @method breakpointRoutes
+	 * @function breakpointRoutes
 	 *
-	 * @return {void}
+	 * @returns {Array}
 	 */
     breakpointRoutes() {
         return this._breakpoint.routes;
     }
 
     /**
+	 * @description
 	 * Release the breakpoint.
 	 *
-	 * @method releaseBreakpoint
-	 *
-	 * @return {void}
+	 * @function releaseBreakpoint
 	 */
     releaseBreakpoint() {
         this._breakpoint = {
@@ -84,9 +84,10 @@ class Store {
     }
 
     /**
+	 * @description
 	 * Add a route to the store
 	 *
-	 * @method add
+	 * @function add
 	 *
 	 * @param  {Route} route
 	 */
@@ -98,13 +99,12 @@ class Store {
     }
 
     /**
+	 * @description
 	 * Remove route from the store.
 	 *
-	 * @method remove
+	 * @function remove
 	 *
 	 * @param  {Route} routeToRemove
-	 *
-	 * @return {void}
 	 */
     remove(routeToRemove) {
         const removeCallback = (route, index) => {
@@ -120,25 +120,25 @@ class Store {
     }
 
     /**
+	 * @description
 	 * Clear all the routes store so far.
 	 *
-	 * @method clear
-	 *
-	 * @return {void}
+	 * @function clear
 	 */
     clear() {
         this._routes = [];
     }
 
     /**
+	 * @description
 	 * Find a route with name or it's url
 	 *
-	 * @method find
+	 * @function find
 	 *
-	 * @param  {String} nameOrRoute
-	 * @param  {String} domain
+	 * @param {string} routeNameOrHandler
+	 * @param {string} domain
 	 *
-	 * @return {Object|Null}
+	 * @returns {Object|Null}
 	 */
     find(routeNameOrHandler, domain) {
         return this._routes.find(route => {
@@ -150,11 +150,12 @@ class Store {
     }
 
     /**
+	 * @description
 	 * Returns a list of stored routes.
 	 *
-	 * @method list
+	 * @function list
 	 *
-	 * @return {Array}
+	 * @returns {Array}
 	 */
     list() {
         return this._routes;

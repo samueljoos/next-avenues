@@ -30,12 +30,13 @@ class Group {
     }
 
     /**
+     * @description
      * Give a name to a group of routes.
      * This will prefix all routes name.
      *
-     * @method as
-     *
-     * @chainable
+     * @function as
+     * @param {string} name
+     * @returns {Group}
      *
      * @example
      * router
@@ -53,14 +54,14 @@ class Group {
     }
 
     /**
+     * @description
      * Prefix group of routes.
      * Also see @ref('Route/prefix')
      *
-     * @method prefix
+     * @function prefix
      *
-     * @param  {String} prefix
-     *
-     * @chainable
+     * @param {string} prefix
+     * @returns {Group}
      *
      * @example
      * router
@@ -73,19 +74,20 @@ class Group {
     }
 
     /**
+     * @description
      * Add domain to a group of routes.
      * Also see @ref('Route/domain')
      *
-     * @method domain
+     * @function domain
      *
-     * @param  {String} domain
-     *
-     * @chainable
+     * @param  {string} domain
+     * @returns {Group}
      *
      * @example
      * router
      *   .group()
      *   .domain('blog.adonisjs.com')
+
      */
     domain(domain) {
         this._routes.forEach((route) => route.domain(domain));
@@ -93,14 +95,14 @@ class Group {
     }
 
     /**
+     * @description
      * Add data to a group of routes.
      * Also see @ref('Route/data')
      *
-     * @method data
+     * @function data
      *
-     * @param  {String} data
-     *
-     * @chainable
+     * @param  {string} data
+     * @returns {Group}
      *
      * @example
      * router

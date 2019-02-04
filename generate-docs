@@ -1,0 +1,5 @@
+#!/bin/bash
+doxdox 'src/Router.js' --layout markdown --output docs/router.md
+doxdox 'src/Route.js' --layout markdown --output docs/route.md
+doxdox 'src/Group.js' --layout markdown --output docs/group.md
+doxdox 'src/Store.js' --layout markdown --output docs/store.md

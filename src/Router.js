@@ -19,6 +19,7 @@ import { default as NextLink } from 'next/link';
 import { errorMessage } from './utils';
 
 /**
+ * @description
  * Router is the public interface used to define
  * routes, groups and Link components.
  *
@@ -34,13 +35,12 @@ class Router {
     }
 
     /**
+     * @description
      * Initialize the client url location data
      *
-     * @method _validateGroupClosure
+     * @function _validateGroupClosure
      *
-     * @param  {Function} callback
-     *
-     * @return {void}
+     * @returns {void}
      *
      * @private
      */
@@ -53,14 +53,13 @@ class Router {
     }
 
     /**
+     * @description
      * Validates the group closure to make sure
      * it is a function
      *
-     * @method _validateGroupClosure
+     * @function _validateGroupClosure
      *
      * @param  {Function} callback
-     *
-     * @return {void}
      *
      * @private
      */
@@ -71,11 +70,10 @@ class Router {
     }
 
     /**
+     * @description
      * Validates that nested groups are not created.
      *
-     * @method _validateNestedGroups
-     *
-     * @return {void}
+     * @function _validateNestedGroups
      *
      * @private
      */
@@ -91,10 +89,11 @@ class Router {
     }
 
     /**
+     * @description
      * Creates a new route which resolves to a Next.js page component.
-     * @method add
-     * @param {String} route
-     * @param {String} page
+     * @function add
+     * @param {string} route
+     * @param {string} page
      * @return {Route}
      */
 
@@ -105,15 +104,16 @@ class Router {
     }
 
     /**
+     * @description
      * Resolves and returns the route that matches given **url** and **host**
      *
      * **Note:** The first matching route will be used. So make
      * sure the generic routes are created after the
      * static routes.
-     * @method match
-     * @param {String} url
-     * @param {String} host
-     * @return {Object}
+     * @function match
+     * @param {string} url
+     * @param {string} host
+     * @returns {Object}
      */
     match(url, host) {
         const protocol = `${this.protocol}://`;
@@ -151,34 +151,35 @@ class Router {
     }
 
     /**
+     * @description
      * Create a group of routes
      *
-     * @method group
+     * @function group
      *
-     * @param {string} [name == null]
+     * @param {string} [name]
      * @param {Function} callback
-     * @return {Group}
+     * @returns {Group}
      *
      * @example
      * routes.group(() => {
      *     routes.add('/', 'dashboard')
      * }).prefix('admin')
      */
-    group() {
-        let name = null;
-        let callback = null;
+    group(name, callback) {
+        const options = {};
 
         if (arguments.length > 1) {
-            [ name, callback ] = arguments;
+            options.name = name;
+            options.callback = callback;
         } else {
-            [ callback ] = arguments;
+            options.callback = name;
         }
 
 
-        this._validateGroupClosure(callback);
+        this._validateGroupClosure(options.callback);
         this._validateNestedGroups();
-        RouteStore.breakpoint(name);
-        callback();
+        RouteStore.breakpoint(options.name);
+        options.callback();
 
         /**
 		 * Create a new group and pass all the routes
@@ -189,24 +190,27 @@ class Router {
         RouteStore.releaseBreakpoint();
         return group;
     }
+
     /**
+     * @description
      * Returns an array of all the registered routes
      *
-     * @method list
+     * @function list
      *
-     * @return {Array}
+     * @returns {Array}
      */
     list() {
         return RouteStore.list();
     }
 
     /**
+     * @description
      * Link component for react
      *
-     * @method Link
+     * @function Link
      *
-     * @param {object} props
-     * @return React.Element
+     * @param {Object} props
+     * @returns {React.Element}
      */
     Link({ children, name, params, domain, protocol, query, ...newProps }) {
         const child = Children.only(children);
@@ -231,11 +235,12 @@ class Router {
     }
 
     /**
+     * @description
      * Return the current active route.
      * This is usualy called inside the getInitialProps a Next.js page component.
      *
-     * @method getCurrentRoute
-     * @return {object}
+     * @function getCurrentRoute
+     * @returns {Object}
      */
     getCurrentRoute() {
         let path;
@@ -251,11 +256,14 @@ class Router {
     }
 
     /**
+     * @description
      * Middleware function for your nextjs server setup.
      *
-     * @method getRequestHandler
+     * @function getRequestHandler
      * @param {Next.App} app
      * @param {Function} customHandler
+     *
+     * @returns {Function}
      */
     getRequestHandler(app, customHandler) {
         const nextHandler = app.getRequestHandler();
