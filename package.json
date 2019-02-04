@@ -1,7 +1,7 @@
 {
   "name": "next-avenues",
-  "version": "0.0.1",
-  "description": "Sofisticated routes for nextjs",
+  "version": "0.1.0",
+  "description": "A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes",
   "main": "lib/index.js",
   "scripts": {
     "start": "babel --watch -d lib/ src/",
