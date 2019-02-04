@@ -139,7 +139,7 @@ const LinkExample = () => (
 
 ## Api documentation
 
-- [Router](/docs/router.md)
-- [Route](/docs/route.md)
-- [Group](/docs/group.md)
-- [Store](/docs/store.md)
+- [Router](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md)
+- [Route](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md)
+- [Group](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md)
+- [Store](https://github.com/samueljoos/next-avenues/blob/master/docs/store.md)

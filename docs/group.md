@@ -1,4 +1,4 @@
-# next-avenues *0.1.0*
+# next-avenues *0.2.0*
 
 
 ### src/Group.js
