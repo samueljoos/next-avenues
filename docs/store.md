@@ -1,12 +1,10 @@
 # next-avenues *0.0.1*
 
-> Sofisticated routes for nextjs
-
 
 ### src/Store.js
 
 
-#### new Store() 
+#### new Store()
 
 Route store is used to store registered routes as an
 array. It is a singleton store to be exported and
@@ -25,7 +23,7 @@ routes.
 
 
 
-#### Store.breakpoint(name) 
+#### Store.breakpoint(name)
 
 Add a breakpoint to routes. All routes after the
 breakpoint will be recorded seperately. Helpful
@@ -48,11 +46,11 @@ Also only one breakpoint at a time is allowed.
 ##### Returns
 
 
--  
+-
 
 
 
-#### Store.hasBreakpoint() 
+#### Store.hasBreakpoint()
 
 Returns a boolean indicating whether breakpoint
 is enabled or not.
@@ -65,11 +63,11 @@ is enabled or not.
 ##### Returns
 
 
-- `Boolean`  
+- `Boolean`
 
 
 
-#### Store.breakpointRoutes() 
+#### Store.breakpointRoutes()
 
 Returns the routes recorded during
 breakpoint.
@@ -82,11 +80,11 @@ breakpoint.
 ##### Returns
 
 
--  
+-
 
 
 
-#### Store.releaseBreakpoint() 
+#### Store.releaseBreakpoint()
 
 Release the breakpoint.
 
@@ -98,11 +96,11 @@ Release the breakpoint.
 ##### Returns
 
 
--  
+-
 
 
 
-#### Store.add(route) 
+#### Store.add(route)
 
 Add a route to the store
 
@@ -125,7 +123,7 @@ Add a route to the store
 
 
 
-#### Store.remove(routeToRemove) 
+#### Store.remove(routeToRemove)
 
 Remove route from the store.
 
@@ -144,11 +142,11 @@ Remove route from the store.
 ##### Returns
 
 
--  
+-
 
 
 
-#### Store.clear() 
+#### Store.clear()
 
 Clear all the routes store so far.
 
@@ -160,11 +158,11 @@ Clear all the routes store so far.
 ##### Returns
 
 
--  
+-
 
 
 
-#### Store.find(nameOrRoute, domain) 
+#### Store.find(nameOrRoute, domain)
 
 Find a route with name or it's url
 
@@ -184,11 +182,11 @@ Find a route with name or it's url
 ##### Returns
 
 
-- `Object` `Null`  
+- `Object` `Null`
 
 
 
-#### Store.list() 
+#### Store.list()
 
 Returns a list of stored routes.
 
@@ -200,7 +198,7 @@ Returns a list of stored routes.
 ##### Returns
 
 
-- `Array`  
+- `Array`
 
 
 

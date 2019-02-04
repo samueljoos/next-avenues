@@ -105,7 +105,7 @@ class Group {
      * @example
      * router
      *   .group()
-     *   .data({ lang: nl })
+     *   .data({ lang: 'nl' })
      */
     data(data) {
         this._routes.forEach((route) => route.data(data));

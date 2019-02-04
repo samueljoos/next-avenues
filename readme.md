@@ -139,8 +139,7 @@ const LinkExample = () => (
 
 ## Api documentation
 
-[Router](/docs/router.md)
-[Route](/docs/route.md)
-[Group](/docs/group.md)
-[Store](/docs/store.md)
-[utils](/docs/utils.md)
+- [Router](/docs/router.md)
+- [Route](/docs/route.md)
+- [Group](/docs/group.md)
+- [Store](/docs/store.md)

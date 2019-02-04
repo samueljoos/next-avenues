@@ -1,12 +1,10 @@
 # next-avenues *0.0.1*
 
-> Sofisticated routes for nextjs
-
 
 ### src/Route.js
 
 
-#### new Route() 
+#### new Route()
 
 This class defines a single route. It supports dynamic
 **url segments** associated **data**
@@ -49,7 +47,7 @@ valid string
 ##### Returns
 
 
--  
+-
 
 
 
@@ -74,11 +72,11 @@ Instantiate private properties on the route instance
 ##### Returns
 
 
--  
+-
 
 
 
-#### this._route() 
+#### this._route()
 
 Private properties
 
@@ -94,7 +92,7 @@ Private properties
 
 
 
-#### this.name() 
+#### this.name()
 
 Public properties
 
@@ -123,7 +121,7 @@ expression is used to match urls.
 ##### Returns
 
 
--  
+-
 
 
 
@@ -147,11 +145,11 @@ route.
 ##### Returns
 
 
-- `Object` `Null`  
+- `Object` `Null`
 
 
 
-#### domain(domain) 
+#### domain(domain)
 
 Define domain for the route. If domain is defined
 then route will only resolve when domain matches.
@@ -184,7 +182,7 @@ Route
 
 
 
-#### as(name) 
+#### as(name)
 
 Define a name as an identifier for your route.
 The main benefit of using a name is that you can make change the route
@@ -218,10 +216,10 @@ Route
 
 
 
-#### prefix(prefix) 
+#### prefix(prefix)
 
 Prefix the route with some string.
-Generally used by the @ref(Route/group) to prefix
+Generally used by the [@ref(]Route/group) to prefix
 a bunch of routes.
 
 
@@ -252,7 +250,7 @@ Route
 
 
 
-#### data(prefix) 
+#### data(prefix)
 
 Associate some static data with a route.
 
@@ -288,7 +286,7 @@ router.group(multilingualRoutes).domain('mydutchwebsite.nl').data({lang: 'nl'})
 
 
 
-#### resolve(url, verb[, host]) 
+#### resolve(url, verb[, host])
 
 Resolves the url by matching it against
 the registered route and verbs. It will
@@ -312,11 +310,11 @@ doesn't match to this route.
 ##### Returns
 
 
-- `Object`  
+- `Object`
 
 
 
-#### subdomains() 
+#### subdomains()
 
 Check for matching subdomains
 
@@ -332,7 +330,7 @@ Check for matching subdomains
 
 
 
-#### if() 
+#### if()
 
 Nothing needs processing, since the route
 and the url are same.
@@ -349,7 +347,7 @@ and the url are same.
 
 
 
-#### tokens() 
+#### tokens()
 
 Get route tokens if matched otherwise
 return null.
@@ -366,7 +364,7 @@ return null.
 
 
 
-#### getUrl(data, options) 
+#### getUrl(data, options)
 
 Get an url based on the data and options provided.
 
@@ -386,11 +384,11 @@ Get an url based on the data and options provided.
 ##### Returns
 
 
-- `string`  
+- `string`
 
 
 
-#### getPage() 
+#### getPage()
 
 Get the Next.js page component name.
 
@@ -402,11 +400,11 @@ Get the Next.js page component name.
 ##### Returns
 
 
-- `String`  
+- `String`
 
 
 
-#### getNextLinkProps() 
+#### getNextLinkProps()
 
 Get the next/link component props for this route.
 Generally you don't need this function and it's
@@ -420,11 +418,11 @@ beter to use the @Ref(Router/Link) component.
 ##### Returns
 
 
-- `String`  
+- `String`
 
 
 
-#### toJSON() 
+#### toJSON()
 
 Returns the JSON representation of the route.
 
@@ -436,7 +434,7 @@ Returns the JSON representation of the route.
 ##### Returns
 
 
-- `Object`  
+- `Object`
 
 
 

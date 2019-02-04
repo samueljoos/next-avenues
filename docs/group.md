@@ -1,12 +1,10 @@
 # next-avenues *0.0.1*
 
-> Sofisticated routes for nextjs
-
 
 ### src/Group.js
 
 
-#### new Group() 
+#### new Group()
 
 Group class is used to group routes with
 common behavior. For example prefixing a bunch
@@ -28,7 +26,7 @@ class.
 
 
 
-#### as() 
+#### as()
 
 Give a name to a group of routes.
 This will prefix all routes name.
@@ -54,7 +52,7 @@ router
 
 
 
-#### prefix(prefix) 
+#### prefix(prefix)
 
 Prefix group of routes.
 Also see @ref('Route/prefix')
@@ -87,7 +85,7 @@ router
 
 
 
-#### domain(domain) 
+#### domain(domain)
 
 Add domain to a group of routes.
 Also see @ref('Route/domain')
@@ -120,7 +118,7 @@ router
 
 
 
-#### data(data) 
+#### data(data)
 
 Add data to a group of routes.
 Also see @ref('Route/data')
@@ -142,7 +140,7 @@ Also see @ref('Route/data')
 ```javascript
 router
   .group()
-  .data({ lang: nl })
+  .data({ lang: 'nl' })
 ```
 
 

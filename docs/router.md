@@ -1,12 +1,10 @@
 # next-avenues *0.0.1*
 
-> Sofisticated routes for nextjs
-
 
 ### src/Router.js
 
 
-#### new Router() 
+#### new Router()
 
 Router is the public interface used to define
 routes, groups and Link components.
@@ -42,7 +40,7 @@ Initialize the client url location data
 ##### Returns
 
 
--  
+-
 
 
 
@@ -66,7 +64,7 @@ it is a function
 ##### Returns
 
 
--  
+-
 
 
 
@@ -82,11 +80,11 @@ Validates that nested groups are not created.
 ##### Returns
 
 
--  
+-
 
 
 
-#### Router.add(route, page) 
+#### Router.add(route, page)
 
 Creates a new route which resolves to a Next.js page component.
 
@@ -106,11 +104,11 @@ Creates a new route which resolves to a Next.js page component.
 ##### Returns
 
 
-- `Route`  
+- `Route`
 
 
 
-#### Router.match(url, host) 
+#### Router.match(url, host)
 
 Resolves and returns the route that matches given **url** and **host**
 
@@ -134,11 +132,11 @@ static routes.
 ##### Returns
 
 
-- `Object`  
+- `Object`
 
 
 
-#### matchingRoute() 
+#### matchingRoute()
 
 Find the first matching route.
 
@@ -154,7 +152,7 @@ Find the first matching route.
 
 
 
-#### if() 
+#### if()
 
 Return null when unable to find a route.
 
@@ -170,7 +168,7 @@ Return null when unable to find a route.
 
 
 
-#### group([name], callback) 
+#### group([name], callback)
 
 Create a group of routes
 
@@ -199,11 +197,11 @@ routes.group(() => {
 ##### Returns
 
 
-- `Group`  
+- `Group`
 
 
 
-#### group() 
+#### group()
 
 Create a new group and pass all the routes
 to the group.
@@ -220,7 +218,7 @@ to the group.
 
 
 
-#### list() 
+#### list()
 
 Returns an array of all the registered routes
 
@@ -232,11 +230,11 @@ Returns an array of all the registered routes
 ##### Returns
 
 
-- `Array`  
+- `Array`
 
 
 
-#### Link(props) 
+#### Link(props)
 
 Link component for react
 
@@ -259,7 +257,7 @@ Link component for react
 
 
 
-#### getCurrentRoute() 
+#### getCurrentRoute()
 
 Return the current active route.
 This is usualy called inside the getInitialProps a Next.js page component.
@@ -272,11 +270,11 @@ This is usualy called inside the getInitialProps a Next.js page component.
 ##### Returns
 
 
-- `object`  
+- `object`
 
 
 
-#### getRequestHandler(app, customHandler) 
+#### getRequestHandler(app, customHandler)
 
 Middleware function for your nextjs server setup.
 
