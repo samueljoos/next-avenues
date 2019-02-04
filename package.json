@@ -3,12 +3,19 @@
   "version": "0.2.1",
   "description": "A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes",
   "main": "lib/index.js",
+  "browser": "lib/index.js",
   "scripts": {
     "start": "babel --watch -d lib/ src/",
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile",
     "test": "eslint ./src && jest tests"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "github:samueljoos/next-avenues"
+  },
+  "homepage": "https://github.com/samueljoos/next-avenues",
+  "bugs": "https://github.com/samueljoos/next-avenues/issues",
   "keywords": [
     "nextjs",
     "next",
@@ -16,7 +23,7 @@
     "routes",
     "route"
   ],
-  "author": "Samuel Joos",
+  "author": "Samuel Joos <info@samueljoos.be> (https://github.com/samueljoos/)",
   "license": "MIT",
   "dependencies": {
     "path-to-regexp": "^3.0.0"
