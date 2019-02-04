@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creating links for a domain route 1`] = `
+<a
+  href="/domain/slug-2"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a prefixed domain route 1`] = `
+<a
+  href="/prefix/domain"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a prefixed route 1`] = `
+<a
+  href="http://undefined:3000/prefix/prefixed"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a route 1`] = `
+<a
+  href="http://undefined:3000/home/slug"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a route in a domain group 1`] = `
+<a
+  href="/domain-first"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a route in a group 1`] = `
+<a
+  href="http://undefined:3000/first"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a route in a prefix group 1`] = `
+<a
+  href="http://undefined:3000/group-prefix/first"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a route in a subdomain group 1`] = `
+<a
+  href="http://subdomain.test:3000/subdomain-first"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
+
+exports[`creating links for a subdomain route 1`] = `
+<a
+  href="http://bla.test:3000/subdomain"
+  onClick={[Function]}
+>
+  link
+</a>
+`;
