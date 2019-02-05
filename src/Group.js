@@ -16,7 +16,7 @@
  * of routes.
  *
  * An instance of group is obtained by calling the
- * `router.group` method on @ref('Router')
+ * `router.group` method on [Router](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md)
  * class.
  *
  * @class Group
@@ -24,23 +24,26 @@
  *
  */
 class Group {
-    constructor(routes, name = null) {
+    constructor(routes) {
         this._routes = routes;
-        this._name = name;
     }
 
     /**
      * @description
      * Give a name to a group of routes.
      * This will prefix all routes name.
+     * Also see [Route.as](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#asname)
      *
      * @function as
-     * @param {string} name
+     * @param {string} name Prefix for the route names seperated by a '.'.
      * @returns {Group}
      *
      * @example
      * router
-     *   .group()
+     *   .group(() => {
+     *      router.add('/', 'dashboard').as('dashboard');
+     *      // the route name will be admin.dashboard
+     *   })
      *   .as('admin')
      */
     as(name) {
@@ -56,16 +59,19 @@ class Group {
     /**
      * @description
      * Prefix group of routes.
-     * Also see @ref('Route/prefix')
+     * Also see [Route.prefix](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#prefixprefix)
      *
      * @function prefix
      *
-     * @param {string} prefix
+     * @param {string} prefix Prefix for the route paths.
      * @returns {Group}
      *
      * @example
      * router
-     *   .group()
+     *   .group(() => {
+     *      router.add('/articles', 'articles').as('articles');
+     *      // the resolved route path will be /api/v1/articles
+     *   })
      *   .prefix('api/v1')
      */
     prefix(prefix) {
@@ -76,18 +82,20 @@ class Group {
     /**
      * @description
      * Add domain to a group of routes.
-     * Also see @ref('Route/domain')
+     * Also see [Route.domain](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#domaindomain)
      *
      * @function domain
      *
-     * @param  {string} domain
+     * @param  {string} domain Domain for the routes.
      * @returns {Group}
      *
      * @example
      * router
-     *   .group()
-     *   .domain('blog.adonisjs.com')
-
+     *   .group(() => {
+     *      router.add('/', 'home').as('home');
+     *      // the resolved route path will be http://next-avenues.com/
+     *   })
+     *   .domain('next-avenues.com')
      */
     domain(domain) {
         this._routes.forEach((route) => route.domain(domain));
@@ -97,16 +105,19 @@ class Group {
     /**
      * @description
      * Add data to a group of routes.
-     * Also see @ref('Route/data')
+     * Also see [Route.data](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#datadata)
      *
      * @function data
      *
-     * @param  {string} data
+     * @param  {Object} data Data for the routes.
      * @returns {Group}
      *
      * @example
      * router
-     *   .group()
+     *   .group(() => {
+     *      router.add('/', 'home').as('home');
+     *      // the data object will be provided on the currentRoute object
+     *   })
      *   .data({ lang: 'nl' })
      */
     data(data) {

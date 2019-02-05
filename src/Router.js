@@ -152,40 +152,35 @@ class Router {
 
     /**
      * @description
-     * Create a group of routes
+     * Create a group of routes.
+     * Also see [Group](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md).
      *
      * @function group
      *
-     * @param {string} [name]
-     * @param {Function} callback
+     * @param {Function} callback Callback which should only contain calls to [Router.add](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#routeraddroute-page).
+     * @param {string} [name] Same as using [Route.as](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#asname).
      * @returns {Group}
      *
      * @example
      * routes.group(() => {
      *     routes.add('/', 'dashboard')
-     * }).prefix('admin')
+     *     // the route name will be admin.dashboard
+     * }, 'admin')
      */
-    group(name, callback) {
-        const options = {};
-
-        if (arguments.length > 1) {
-            options.name = name;
-            options.callback = callback;
-        } else {
-            options.callback = name;
-        }
-
-
-        this._validateGroupClosure(options.callback);
+    group(callback, name) {
+        this._validateGroupClosure(callback);
         this._validateNestedGroups();
-        RouteStore.breakpoint(options.name);
-        options.callback();
+        RouteStore.breakpoint(name);
+        callback();
 
         /**
 		 * Create a new group and pass all the routes
 		 * to the group.
 		 */
         const group = new RouteGroup(RouteStore.breakpointRoutes());
+        if (name) {
+            group.as(name);
+        }
 
         RouteStore.releaseBreakpoint();
         return group;

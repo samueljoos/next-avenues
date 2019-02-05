@@ -13,7 +13,7 @@ common behavior. For example prefixing a bunch
 of routes.
 
 An instance of group is obtained by calling the
-`router.group` method on @ref('Router')
+`router.group` method on [Router](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md)
 class.
 
 
@@ -32,6 +32,7 @@ class.
 
 Give a name to a group of routes.
 This will prefix all routes name.
+Also see [Route.as](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#asname)
 
 
 
@@ -40,7 +41,7 @@ This will prefix all routes name.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `string`  |  | &nbsp; |
+| name | `string`  | Prefix for the route names. A **.** will be used as seperator. | &nbsp; |
 
 
 
@@ -49,7 +50,10 @@ This will prefix all routes name.
 
 ```javascript
 router
-  .group()
+  .group(() => {
+     router.add('/', 'dashboard').as('dashboard');
+     // the route name will be admin.dashboard
+  })
   .as('admin')
 ```
 
@@ -64,7 +68,7 @@ router
 #### prefix(prefix) 
 
 Prefix group of routes.
-Also see @ref('Route/prefix')
+Also see [Route.prefix](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#prefixprefix)
 
 
 
@@ -73,7 +77,7 @@ Also see @ref('Route/prefix')
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| prefix | `string`  |  | &nbsp; |
+| prefix | `string`  | Prefix for the route paths. | &nbsp; |
 
 
 
@@ -82,7 +86,10 @@ Also see @ref('Route/prefix')
 
 ```javascript
 router
-  .group()
+  .group(() => {
+     router.add('/articles', 'articles').as('articles');
+     // the resolved route path will be /api/v1/articles
+  })
   .prefix('api/v1')
 ```
 
@@ -97,7 +104,7 @@ router
 #### domain(domain) 
 
 Add domain to a group of routes.
-Also see @ref('Route/domain')
+Also see [Route.domain](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#domaindomain)
 
 
 
@@ -106,7 +113,7 @@ Also see @ref('Route/domain')
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| domain | `string`  |  | &nbsp; |
+| domain | `string`  | Domain for the routes. | &nbsp; |
 
 
 
@@ -115,8 +122,11 @@ Also see @ref('Route/domain')
 
 ```javascript
 router
-  .group()
-  .domain('blog.adonisjs.com')
+  .group(() => {
+     router.add('/', 'home').as('home');
+     // the resolved route path will be http://next-avenues.com/
+  })
+  .domain('next-avenues.com')
 ```
 
 
@@ -130,7 +140,7 @@ router
 #### data(data) 
 
 Add data to a group of routes.
-Also see @ref('Route/data')
+Also see [Route.data](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md#datadata)
 
 
 
@@ -139,7 +149,7 @@ Also see @ref('Route/data')
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| data | `string`  |  | &nbsp; |
+| data | `Object`  | Data for the routes. | &nbsp; |
 
 
 
@@ -148,7 +158,10 @@ Also see @ref('Route/data')
 
 ```javascript
 router
-  .group()
+  .group(() => {
+     router.add('/', 'home').as('home');
+     // the data object will be provided on the currentRoute object
+  })
   .data({ lang: 'nl' })
 ```
 

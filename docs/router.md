@@ -163,9 +163,10 @@ Return null when unable to find a route.
 
 
 
-#### group([name], callback) 
+#### group(callback[, name]) 
 
-Create a group of routes
+Create a group of routes.
+Also see [Group](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md).
 
 
 
@@ -174,8 +175,8 @@ Create a group of routes
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `string`  |  | *Optional* |
-| callback | `Function`  |  | &nbsp; |
+| callback | `Function`  | Callback which should only contain calls to [Router.add](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#routeraddroute-page). | &nbsp; |
+| name | `string`  | Same as using [Route.as](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#asname). | *Optional* |
 
 
 
@@ -185,7 +186,8 @@ Create a group of routes
 ```javascript
 routes.group(() => {
     routes.add('/', 'dashboard')
-}).prefix('admin')
+    // the route name will be admin.dashboard
+}, 'admin')
 ```
 
 
