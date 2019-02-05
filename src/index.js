@@ -11,5 +11,4 @@ export { default as router } from './Router';
 export { default as Route } from './Route';
 export { default as store } from './Store';
 export { default as Group } from './Group';
-export { default as requestHandler } from './requestHandler';
 export { default as Link } from './Link';

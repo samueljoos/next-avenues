@@ -1,7 +1,6 @@
 import { createElement } from 'react';
-import router from '../src/Router';
+import { Link, router } from '../src';
 import renderer from 'react-test-renderer';
-const Link = router.Link;
 
 router.domain = 'local.test';
 router.port = 3000;

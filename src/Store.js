@@ -36,7 +36,7 @@ class Store {
 	 *
 	 * @function breakpoint
 	 *
-	 * @param {string} name
+	 * @param {string} name Breakpoint name.
 	 */
     breakpoint(name = null) {
         this._breakpoint.enabled = true;
@@ -85,11 +85,13 @@ class Store {
 
     /**
 	 * @description
-	 * Add a route to the store
+	 * Add a route to the store.
+	 * This function is used by [Router.add](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#routeraddroute-page)
+	 * Also see [Route](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md)
 	 *
 	 * @function add
 	 *
-	 * @param  {Route} route
+	 * @param  {Route} route Route instance.
 	 */
     add(route) {
         if (this.hasBreakpoint()) {
@@ -104,7 +106,7 @@ class Store {
 	 *
 	 * @function remove
 	 *
-	 * @param  {Route} routeToRemove
+	 * @param  {Route} routeToRemove Route instance.
 	 */
     remove(routeToRemove) {
         const removeCallback = (route, index) => {
@@ -135,8 +137,8 @@ class Store {
 	 *
 	 * @function find
 	 *
-	 * @param {string} routeNameOrHandler
-	 * @param {string} domain
+	 * @param {string} routeNameOrHandler Route name or path template.
+	 * @param {string} domain For domain matching not used for subdomain matching.
 	 *
 	 * @returns {Object|Null}
 	 */

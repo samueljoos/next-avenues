@@ -14,8 +14,6 @@ import Route from './Route';
 import RouteGroup from './Group';
 import RouteStore from './Store';
 import { parse } from 'url';
-import { createElement, Children, cloneElement } from 'react';
-import { default as NextLink } from 'next/link';
 import { errorMessage } from './utils';
 
 /**
@@ -29,63 +27,8 @@ import { errorMessage } from './utils';
  */
 class Router {
     constructor() {
-        this.Link = this.Link.bind(this);
         this.getRequestHandler = this.getRequestHandler.bind(this);
         this._initialize();
-    }
-
-    /**
-     * @description
-     * Initialize the client url location data
-     *
-     * @function _validateGroupClosure
-     *
-     * @returns {void}
-     *
-     * @private
-     */
-    _initialize() {
-        if (typeof window !== 'undefined') {
-            this.port = document.location.port;
-            this.domain = document.location.host.split(':')[0];
-            this.protocol = document.location.protocol.split(':')[0];
-        }
-    }
-
-    /**
-     * @description
-     * Validates the group closure to make sure
-     * it is a function
-     *
-     * @function _validateGroupClosure
-     *
-     * @param  {Function} callback
-     *
-     * @private
-     */
-    _validateGroupClosure(callback) {
-        if (typeof callback !== 'function') {
-            throw errorMessage('Route.group expects a callback', callback);
-        }
-    }
-
-    /**
-     * @description
-     * Validates that nested groups are not created.
-     *
-     * @function _validateNestedGroups
-     *
-     * @private
-     */
-    _validateNestedGroups() {
-        if (RouteStore.hasBreakpoint()) {
-            RouteStore.releaseBreakpoint();
-            throw errorMessage(
-                'Nested route groups are not allowed',
-                500,
-                'E_NESTED_ROUTE_GROUPS'
-            );
-        }
     }
 
     /**
@@ -111,8 +54,8 @@ class Router {
      * sure the generic routes are created after the
      * static routes.
      * @function match
-     * @param {string} url
-     * @param {string} host
+     * @param {string} url Url string to find a match for.
+     * @param {string} host Domain to find a match for.
      * @returns {Object}
      */
     match(url, host) {
@@ -200,37 +143,6 @@ class Router {
 
     /**
      * @description
-     * Link component for react
-     *
-     * @function Link
-     *
-     * @param {Object} props
-     * @returns {React.Element}
-     */
-    Link({ children, name, params, domain, protocol, query, ...newProps }) {
-        const child = Children.only(children);
-        let href = newProps.as || newProps.href;
-        const props = {
-            onClick: (e) => {
-                if (child.props && typeof child.props.onClick === 'function') {
-                    child.props.onClick(e);
-                }
-                this.path = href && href.split('?')[0];
-            }
-        };
-
-        try {
-            const route = RouteStore.find(name, domain || this.domain);
-            const nextLinkProps = route.getNextLinkProps(params, { domain, protocol: protocol, query });
-            href = nextLinkProps.as;
-            return createElement(NextLink, { ...newProps, ...nextLinkProps }, cloneElement(child, props));
-        } catch (e) {
-            return createElement(NextLink, { ...newProps }, child);
-        }
-    }
-
-    /**
-     * @description
      * Return the current active route.
      * This is usualy called inside the getInitialProps a Next.js page component.
      *
@@ -255,8 +167,8 @@ class Router {
      * Middleware function for your nextjs server setup.
      *
      * @function getRequestHandler
-     * @param {Next.App} app
-     * @param {Function} customHandler
+     * @param {Next.App} app The value of Next.js next().
+     * @param {Function} [customHandler] Callback to customise the renderHandler parameters.
      *
      * @returns {Function}
      */
@@ -285,6 +197,64 @@ class Router {
                 nextHandler(req, res, route.parsedUrl);
             }
         };
+    }
+
+    //////
+    // Private functions
+    //////
+
+    /**
+     * @description
+     * Initialize the client url location data
+     *
+     * @function _validateGroupClosure
+     *
+     * @returns {void}
+     *
+     * @private
+     */
+    _initialize() {
+        if (typeof window !== 'undefined') {
+            this.port = document.location.port;
+            this.domain = document.location.host.split(':')[0];
+            this.protocol = document.location.protocol.split(':')[0];
+        }
+    }
+
+    /**
+     * @description
+     * Validates the group closure to make sure
+     * it is a function
+     *
+     * @function _validateGroupClosure
+     *
+     * @param  {Function} callback
+     *
+     * @private
+     */
+    _validateGroupClosure(callback) {
+        if (typeof callback !== 'function') {
+            throw errorMessage('Route.group expects a callback', callback);
+        }
+    }
+
+    /**
+     * @description
+     * Validates that nested groups are not created.
+     *
+     * @function _validateNestedGroups
+     *
+     * @private
+     */
+    _validateNestedGroups() {
+        if (RouteStore.hasBreakpoint()) {
+            RouteStore.releaseBreakpoint();
+            throw errorMessage(
+                'Nested route groups are not allowed',
+                500,
+                'E_NESTED_ROUTE_GROUPS'
+            );
+        }
     }
 }
 

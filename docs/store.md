@@ -40,7 +40,7 @@ Also only one breakpoint at a time is allowed.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `string`  |  | &nbsp; |
+| name | `string`  | Breakpoint name. | &nbsp; |
 
 
 
@@ -104,7 +104,9 @@ Release the breakpoint.
 
 #### Store.add(route) 
 
-Add a route to the store
+Add a route to the store.
+This function is used by [Router.add](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#routeraddroute-page)
+Also see [Route](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md)
 
 
 
@@ -113,7 +115,7 @@ Add a route to the store
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| route | `Route`  |  | &nbsp; |
+| route | `Route`  | Route instance. | &nbsp; |
 
 
 
@@ -136,7 +138,7 @@ Remove route from the store.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| routeToRemove | `Route`  |  | &nbsp; |
+| routeToRemove | `Route`  | Route instance. | &nbsp; |
 
 
 
@@ -175,8 +177,8 @@ Find a route with name or it's url
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| routeNameOrHandler | `string`  |  | &nbsp; |
-| domain | `string`  |  | &nbsp; |
+| routeNameOrHandler | `string`  | Route name or path template. | &nbsp; |
+| domain | `string`  | For domain matching not used for subdomain matching. | &nbsp; |
 
 
 

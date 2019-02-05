@@ -12,7 +12,7 @@
  * Create a url query string from an object
  *
  * @function toQuerystring
- * @param {Object} obj
+ * @param {Object.<string, string>} obj
  */
 export const toQuerystring = obj =>
     '?' + Object.keys(obj)

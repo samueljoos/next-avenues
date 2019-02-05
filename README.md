@@ -21,15 +21,16 @@ npm install next-avenues --save
 Create a routes.js file inside your project
 
 ```js
-const router = require("next-avenues");
+// ./routes.js
+const router = require('next-avenues');
 
-router.add("/", "index").as("homepage");
-router.add("/blog-item/:slug", "blog").as("blog-item");
+router.add('/', 'index').as('homepage');
+router.add('/blog-item/:slug', 'blog').as('blog-item');
 router
 	.group(() => {
-		router.add("/", "admin-dashboard").as("admin-dashboard");
+		router.add('/', 'admin-dashboard').as('admin-dashboard');
 	})
-	.prefix("admin");
+	.prefix('admin');
 
 module.exports = router;
 ```
@@ -42,7 +43,7 @@ To get the route data you need to import the routes.js file and call the getCurr
 
 ```js
 // ./pages/BlogItem.js
-import routes from "../routes";
+import routes from '../routes';
 export default class BlogItem extends React.Component {
 	static async getInitialProps() {
 		// Retrieve the current route data
@@ -61,9 +62,9 @@ Most of the times you'll want an \_app.js component which does the call to your 
 
 ```js
 // ./pages/_app.js
-import React from "react";
-import App, { Container } from "next/app";
-import routes from "../routes";
+import React from 'react';
+import App, { Container } from 'next/app';
+import routes from '../routes';
 export default class App extends React.Component {
 	static async getInitialProps() {
 		let pageProps = {};
@@ -89,7 +90,7 @@ Now you can access the route data in every page component like this:
 
 ```js
 // ./pages/BlogItem.js
-import routes from "../routes";
+import routes from '../routes';
 export default class BlogItem extends React.Component {
 	static async getInitialProps(ctx, route) {
 		// route.params.slug
@@ -107,31 +108,33 @@ Use the Link component to generate links based on route name
 For example consider following routes.js in the root of your project.
 ```js
 // ./routes.js
-const router = require("next-avenues");
+const router = require('next-avenues');
 
-router.add("/", "index").as("homepage");
-router.add("/blog-item/:slug", "blog").as("blog-item");
+router.add('/', 'index').as('homepage');
+router.add('/blog-item/:slug', 'blog').as('blog-item');
 
 router
 	.group(() => {
-		router.add("/", "admin-dashboard").as("dashboard");
+		router.add('/', 'admin-dashboard').as('dashboard');
 	})
-    .name("admin")
-    .domain(":subdomain.someurl.com")
+    .name('admin')
+    .domain(':subdomain.someurl.com')
     .prefix('admin');
 
 module.exports = router;
 ```
 
 ```js
-import { Link } from '../routes';
+// ./components/LinkExample.js
+import { Link } from 'next-avenues';
+
 const LinkExample = () => (
     <div>
-        <Link name="homepage"><a>Homepage</a></Link>
+        <Link name='homepage'><a>Homepage</a></Link>
         // this resolves to a link with following href: '/'
-        <Link name="blog-item" params={{ slug:'some-article' }}><a>A blog post</a></Link>
+        <Link name='blog-item' params={{ slug:'some-article' }}><a>A blog post</a></Link>
         // this resolves to a link with following href: '/blog-item/some-article'
-        <Link name="admin.dashboard" params={{ subdomain:'some-subdomain' }}><a>A complex route url</a></Link>
+        <Link name='admin.dashboard' params={{ subdomain:'some-subdomain' }}><a>A complex route url</a></Link>
         // this resolves to a link with following href: 'http://some-subdomain.someurl.com/admin/'
     </div>
 )
@@ -143,3 +146,4 @@ const LinkExample = () => (
 - [Route](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md)
 - [Group](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md)
 - [Store](https://github.com/samueljoos/next-avenues/blob/master/docs/store.md)
+- [Link](https://github.com/samueljoos/next-avenues/blob/master/docs/link.md)

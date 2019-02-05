@@ -23,62 +23,6 @@ routes, groups and Link components.
 
 
 
-#### Router._initialize()  *private method*
-
-Initialize the client url location data
-
-
-
-
-
-
-##### Returns
-
-
--  
-
-
-
-#### Router._validateGroupClosure(callback)  *private method*
-
-Validates the group closure to make sure
-it is a function
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| callback | `Function`  |  | &nbsp; |
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### Router._validateNestedGroups()  *private method*
-
-Validates that nested groups are not created.
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
 #### Router.add(route, page) 
 
 Creates a new route which resolves to a Next.js page component.
@@ -118,8 +62,8 @@ static routes.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| url | `string`  |  | &nbsp; |
-| host | `string`  |  | &nbsp; |
+| url | `string`  | Url string to find a match for. | &nbsp; |
+| host | `string`  | Domain to find a match for. | &nbsp; |
 
 
 
@@ -231,29 +175,6 @@ Returns an array of all the registered routes
 
 
 
-#### Link(props) 
-
-Link component for react
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| props | `Object`  |  | &nbsp; |
-
-
-
-
-##### Returns
-
-
-- `React.Element`  
-
-
-
 #### getCurrentRoute() 
 
 Return the current active route.
@@ -271,7 +192,7 @@ This is usualy called inside the getInitialProps a Next.js page component.
 
 
 
-#### getRequestHandler(app, customHandler) 
+#### getRequestHandler(app[, customHandler]) 
 
 Middleware function for your nextjs server setup.
 
@@ -282,8 +203,8 @@ Middleware function for your nextjs server setup.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| app | `Next.App`  |  | &nbsp; |
-| customHandler | `Function`  |  | &nbsp; |
+| app | `Next.App`  | The value of Next.js next(). | &nbsp; |
+| customHandler | `Function`  | Callback to customise the renderHandler parameters. | *Optional* |
 
 
 
@@ -292,6 +213,62 @@ Middleware function for your nextjs server setup.
 
 
 - `Function`  
+
+
+
+#### _initialize()  *private method*
+
+Initialize the client url location data
+
+
+
+
+
+
+##### Returns
+
+
+-  
+
+
+
+#### _validateGroupClosure(callback)  *private method*
+
+Validates the group closure to make sure
+it is a function
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| callback | `Function`  |  | &nbsp; |
+
+
+
+
+##### Returns
+
+
+- `Void`
+
+
+
+#### _validateNestedGroups()  *private method*
+
+Validates that nested groups are not created.
+
+
+
+
+
+
+##### Returns
+
+
+- `Void`
 
 
 
