@@ -34,117 +34,19 @@ class Route {
 
     /**
      * @description
-     * Validates the route to make sure it is a
-     * valid string
-     *
-     * @function _validateRoute
-     *
-     * @param {string} route
-     *
-     * @returns {void}
-     *
-     * @private
-     */
-    _validateRoute(route) {
-        if (typeof route !== 'string') {
-            throw errorMessage(
-                'Cannot instantiate route without a valid url string',
-                route
-            );
-        }
-    }
-
-    /**
-     * @description
-     * Instantiate private properties on the route instance
-     *
-     * @function _instantiate
-     *
-     * @param  {Router} router
-     * @param  {string} route
-     * @param  {string} page
-     *
-     * @private
-     */
-    _instantiate(router, route, page) {
-        this.router = router;
-        this._validateRoute(route);
-
-        const routenName = `/${route.replace(/^\/|\/$/g, '')}`;
-
-        /**
-		 * Private properties
-		 */
-        this._route = routenName === '/*' ? '/(.*)' : routenName;
-        this._keys = [];
-
-        /**
-		 * Public properties
-		 */
-        this.name = routenName;
-        this.page = page;
-        this.forDomain = null;
-        this.domainKeys = [];
-    }
-
-    /**
-     * @description
-     * Make the regexp pattern for the route. Later this
-     * expression is used to match urls.
-     *
-     * @function _makeRoutePattern
-     *
-     * @private
-     */
-    _makeRoutePattern() {
-        this._keys = [];
-        this._regexp = pathToRegexp(this._route, this._keys);
-    }
-
-    /**
-     * @description
-     * Returns an object of dynamic domains for a given
-     * route.
-     *
-     * @function _getSubDomains
-     *
-     * @param {string} host
-     *
-     * @returns {Object|Null}
-     *
-     * @private
-     */
-    _getSubDomains(host) {
-        if (!this.forDomain) {
-            return null;
-        }
-
-        const domainTokens = this.forDomain.exec(host);
-        if (!domainTokens) {
-            return null;
-        }
-
-        return this.domainKeys.reduce((result, key, index) => {
-            let value = domainTokens[index + 1] || null;
-            result[key.name] = value;
-            return result;
-        }, {});
-    }
-
-    /**
-     * @description
      * Define domain for the route. If domain is defined
      * then route will only resolve when domain matches.
+     * Also see [Group.domain](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#domaindomain).
      *
      * @function domain
      *
-     * @param  {string}  domain
+     * @param  {string}  domain The domain template string.
      * @returns {Route}
      *
      * @example
-     * Route
-     *   .get(...)
-     *   .domain('blog.nextjs.org')
+     * router
+     *   .add('/', 'home')
+     *   .domain('blog.next-avenues.org')
      */
     domain(domain) {
         this.domainKeys = [];
@@ -162,13 +64,13 @@ class Route {
      *
      * @function as
      *
-     * @param  {string} name
+     * @param  {string} name The route name.
      *
      * @returns {Route}
      *
      * @example
-     * Route
-     *   .get(...)
+     * router
+     *   .add('/', 'home')
      *   .as('name')
      */
     as(name) {
@@ -179,7 +81,7 @@ class Route {
     /**
      * @description
      * Prefix the route with some string.
-     * Generally used by the @ref(Route/group) to prefix a bunch of routes.
+     * Generally used via [Group.prefix](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#prefixprefix) to prefix a bunch of routes.
      *
      * @function prefix
      *
@@ -188,8 +90,8 @@ class Route {
      * @returns {Route}
      *
      * @example
-     * Route
-     *   .get(...)
+     * router
+     *   .add('/articles', 'articles')
      *   .prefix('api/v1')
      */
     prefix(prefix) {
@@ -201,13 +103,15 @@ class Route {
 
     /**
      * @description
-     * Associate some static data with a route.
+     * Associate some static (meta)data with a route.
+     * This data will be available when you call [Router.getCurrentRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#getcurrentroute).
+     * Also see [Group.data](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#datadata).
      *
      * Example: This can be handy when you want to create multilingual domain setup.
      *
      * @function data
      *
-     * @param  {string} data
+     * @param  {Object} data Static data.
      *
      * @returns {Route}
      *
@@ -232,13 +136,13 @@ class Route {
      *
      * @function resolve
      *
-     * @param  {string} url
-     * @param  {string} host
+     * @param  {string} url The url string.
+     * @param  {string} host The domain string.
      *
      * @returns {Object}
      */
     resolve(url, host) {
-        /**
+        /*
 		 * Check for matching subdomains
 		 */
         const subdomains = this._getSubDomains(host);
@@ -246,7 +150,7 @@ class Route {
             return null;
         }
 
-        /**
+        /*
 		 * Nothing needs processing, since the route
 		 * and the url are same.
 		 */
@@ -254,7 +158,7 @@ class Route {
             return { url, params: {}, subdomains: subdomains || {}};
         }
 
-        /**
+        /*
 		 * Get route tokens if matched otherwise
 		 * return null.
 		 */
@@ -275,27 +179,27 @@ class Route {
 
     /**
      * @description
-     * Get an url based on the data and options provided.
+     * Create an url based on the params and options provided.
      *
      * @function getUrl
      *
-     * @param {Object} data
-     * @param {Object} options
+     * @param {Object.<string, string>} [params] Data to build the url path.
+     * @param {{protocol: ?string, domain: ?string, query:?Object.<string, string>}} options Options object.
      *
      * @returns {string}
      */
-    getUrl(data, options) {
+    getUrl(params = {}, options = {}) {
         let compiledDomain;
 
         if (this._domain) {
             if (this.domainKeys.length) {
-                compiledDomain = pathToRegexp.compile(this._domain)(data);
+                compiledDomain = pathToRegexp.compile(this._domain)(params);
             } else {
                 compiledDomain = this._domain;
             }
         }
 
-        const compiledRoute = pathToRegexp.compile(this._route)(data || {});
+        const compiledRoute = pathToRegexp.compile(this._route)(params || {});
 
         /**
 		 * When domain exists, build a complete url over creating
@@ -335,13 +239,13 @@ class Route {
      *
      * @function getNextLinkProps
      *
-     * @param {Object} data
-     * @param {Object} options
+     * @param {Object.<string, string>} [params] Data to build the url path.
+     * @param {{protocol: ?string, domain: ?string, query:?Object.<string, string>}} [options] Options object.
      *
      * @returns {Object}
      */
-    getNextLinkProps(data, options) {
-        const url = this.getUrl(data, options);
+    getNextLinkProps(params = {}, options = {}) {
+        const url = this.getUrl(params, options);
         const protocol = options.protocol || this.router.protocol;
         if (url.indexOf(protocol) === 0) {
             return {
@@ -356,7 +260,7 @@ class Route {
 
     /**
      * @description
-     * Returns the JSON representation of the route.
+     * Returns a JSON representation of the route.
      *
      * @function toJSON
      *
@@ -370,6 +274,105 @@ class Route {
             data: this.data,
             page: this.page
         };
+    }
+
+    //////
+    // Private functions
+    //////
+
+    /**
+     * @description
+     * Validates the route to make sure it is a
+     * valid string
+     *
+     * @function _validateRoute
+     *
+     * @param {string} route The route template path.
+     *
+     * @returns {void}
+     *
+     * @private
+     */
+    _validateRoute(route) {
+        if (typeof route !== 'string') {
+            throw errorMessage(
+                'Cannot instantiate route without a valid url string',
+                route
+            );
+        }
+    }
+
+    /**
+     * @description
+     * Instantiate private properties on the route instance
+     *
+     * @function _instantiate
+     *
+     * @param  {Router} router Reference to the [Router](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md).
+     * @param  {string} route The route template path.
+     * @param  {string} page The Next.js page component name.
+     *
+     * @private
+     */
+    _instantiate(router, route, page) {
+        this.router = router;
+        this._validateRoute(route);
+
+        const routenName = `/${route.replace(/^\/|\/$/g, '')}`;
+
+        // private properties
+        this._route = routenName === '/*' ? '/(.*)' : routenName;
+        this._keys = [];
+
+        // public properties
+        this.name = routenName;
+        this.page = page;
+        this.forDomain = null;
+        this.domainKeys = [];
+    }
+
+    /**
+     * @description
+     * Make the regexp pattern for the route. Later this
+     * expression is used to match urls.
+     *
+     * @function _makeRoutePattern
+     *
+     * @private
+     */
+    _makeRoutePattern() {
+        this._keys = [];
+        this._regexp = pathToRegexp(this._route, this._keys);
+    }
+
+    /**
+     * @description
+     * Returns an object of dynamic domains for a given
+     * route.
+     *
+     * @function _getSubDomains
+     *
+     * @param {string} host The domain template string.
+     *
+     * @returns {Object|Null}
+     *
+     * @private
+     */
+    _getSubDomains(host) {
+        if (!this.forDomain) {
+            return null;
+        }
+
+        const domainTokens = this.forDomain.exec(host);
+        if (!domainTokens) {
+            return null;
+        }
+
+        return this.domainKeys.reduce((result, key, index) => {
+            let value = domainTokens[index + 1] || null;
+            result[key.name] = value;
+            return result;
+        }, {});
     }
 }
 

@@ -92,8 +92,8 @@ class Router {
      * @description
      * Creates a new route which resolves to a Next.js page component.
      * @function add
-     * @param {string} route
-     * @param {string} page
+     * @param {string} route The route name.
+     * @param {string} page The Next.js page component.
      * @return {Route}
      */
 

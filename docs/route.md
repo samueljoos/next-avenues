@@ -29,6 +29,254 @@ Example: `router.add(name, page)`
 
 
 
+#### domain(domain) 
+
+Define domain for the route. If domain is defined
+then route will only resolve when domain matches.
+Also see [Group.domain](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#domaindomain).
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| domain | `string`  | The domain template string. | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+router
+  .add('/', 'home')
+  .domain('blog.next-avenues.org')
+```
+
+
+##### Returns
+
+
+- `Route`  
+
+
+
+#### as(name) 
+
+Define a name as an identifier for your route.
+The main benefit of using a name is that you can make change the route
+without having to refactor all your route references.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| name | `string`  | The route name. | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+router
+  .add('/', 'home')
+  .as('name')
+```
+
+
+##### Returns
+
+
+- `Route`  
+
+
+
+#### prefix(prefix) 
+
+Prefix the route with some string.
+Generally used via [Group.prefix](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#prefixprefix) to prefix a bunch of routes.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| prefix | `string`  |  | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+router
+  .add('/articles', 'articles')
+  .prefix('api/v1')
+```
+
+
+##### Returns
+
+
+- `Route`  
+
+
+
+#### data(data) 
+
+Associate some static (meta)data with a route.
+This data will be available when you call [Router.getCurrentRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#getcurrentroute).
+Also see [Group.data](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#datadata).
+
+Example: This can be handy when you want to create multilingual domain setup.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| data | `Object`  | Static data. | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+const multilingualRoutes = () => {
+    router.add('/path', 'page')
+}
+router.group(multilingualRoutes).domain('myfrenchwebsite.fr').data({lang: 'fr'})
+router.group(multilingualRoutes).domain('mydutchwebsite.nl').data({lang: 'nl'})
+```
+
+
+##### Returns
+
+
+- `Route`  
+
+
+
+#### resolve(url, host) 
+
+Resolves the url by matching it against
+the registered route and verbs. It will
+return an empty object when the url
+doesn't match to this route.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| url | `string`  | The url string. | &nbsp; |
+| host | `string`  | The domain string. | &nbsp; |
+
+
+
+
+##### Returns
+
+
+- `Object`  
+
+
+
+#### getUrl([params], options) 
+
+Create an url based on the params and options provided.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| params | `Object.<string, string>`  | Data to build the url path. | *Optional* |
+| options | `[object Object]`  | Options object. | &nbsp; |
+
+
+
+
+##### Returns
+
+
+- `string`  
+
+
+
+#### getPage() 
+
+Get the Next.js page component name.
+
+
+
+
+
+
+##### Returns
+
+
+- `string`  
+
+
+
+#### getNextLinkProps([params, options]) 
+
+Get the next/link component props for this route.
+Generally you don't need this function and it's
+beter to use the @Ref(Router/Link) component.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| params | `Object.<string, string>`  | Data to build the url path. | *Optional* |
+| options | `[object Object]`  | Options object. | *Optional* |
+
+
+
+
+##### Returns
+
+
+- `Object`  
+
+
+
+#### toJSON() 
+
+Returns a JSON representation of the route.
+
+
+
+
+
+
+##### Returns
+
+
+- `Object`  
+
+
+
 #### _validateRoute(route)  *private method*
 
 Validates the route to make sure it is a
@@ -41,7 +289,7 @@ valid string
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| route | `string`  |  | &nbsp; |
+| route | `string`  | The route template path. | &nbsp; |
 
 
 
@@ -64,41 +312,9 @@ Instantiate private properties on the route instance
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| router | `Router`  |  | &nbsp; |
-| route | `string`  |  | &nbsp; |
-| page | `string`  |  | &nbsp; |
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### this._route() 
-
-Private properties
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### this.name() 
-
-Public properties
-
-
+| router | `Router`  | Reference to the [Router](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md). | &nbsp; |
+| route | `string`  | The route template path. | &nbsp; |
+| page | `string`  | The Next.js page component name. | &nbsp; |
 
 
 
@@ -139,7 +355,7 @@ route.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| host | `string`  |  | &nbsp; |
+| host | `string`  | The domain template string. | &nbsp; |
 
 
 
@@ -148,301 +364,6 @@ route.
 
 
 - `Object` `Null`  
-
-
-
-#### domain(domain) 
-
-Define domain for the route. If domain is defined
-then route will only resolve when domain matches.
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| domain | `string`  |  | &nbsp; |
-
-
-
-
-##### Examples
-
-```javascript
-Route
-  .get(...)
-  .domain('blog.nextjs.org')
-```
-
-
-##### Returns
-
-
-- `Route`  
-
-
-
-#### as(name) 
-
-Define a name as an identifier for your route.
-The main benefit of using a name is that you can make change the route
-without having to refactor all your route references.
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| name | `string`  |  | &nbsp; |
-
-
-
-
-##### Examples
-
-```javascript
-Route
-  .get(...)
-  .as('name')
-```
-
-
-##### Returns
-
-
-- `Route`  
-
-
-
-#### prefix(prefix) 
-
-Prefix the route with some string.
-Generally used by the @ref(Route/group) to prefix a bunch of routes.
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| prefix | `string`  |  | &nbsp; |
-
-
-
-
-##### Examples
-
-```javascript
-Route
-  .get(...)
-  .prefix('api/v1')
-```
-
-
-##### Returns
-
-
-- `Route`  
-
-
-
-#### data(data) 
-
-Associate some static data with a route.
-
-Example: This can be handy when you want to create multilingual domain setup.
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| data | `string`  |  | &nbsp; |
-
-
-
-
-##### Examples
-
-```javascript
-const multilingualRoutes = () => {
-    router.add('/path', 'page')
-}
-router.group(multilingualRoutes).domain('myfrenchwebsite.fr').data({lang: 'fr'})
-router.group(multilingualRoutes).domain('mydutchwebsite.nl').data({lang: 'nl'})
-```
-
-
-##### Returns
-
-
-- `Route`  
-
-
-
-#### resolve(url, host) 
-
-Resolves the url by matching it against
-the registered route and verbs. It will
-return an empty object when the url
-doesn't match to this route.
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| url | `string`  |  | &nbsp; |
-| host | `string`  |  | &nbsp; |
-
-
-
-
-##### Returns
-
-
-- `Object`  
-
-
-
-#### subdomains() 
-
-Check for matching subdomains
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### if() 
-
-Nothing needs processing, since the route
-and the url are same.
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### tokens() 
-
-Get route tokens if matched otherwise
-return null.
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### getUrl(data, options) 
-
-Get an url based on the data and options provided.
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| data | `Object`  |  | &nbsp; |
-| options | `Object`  |  | &nbsp; |
-
-
-
-
-##### Returns
-
-
-- `string`  
-
-
-
-#### getPage() 
-
-Get the Next.js page component name.
-
-
-
-
-
-
-##### Returns
-
-
-- `string`  
-
-
-
-#### getNextLinkProps(data, options) 
-
-Get the next/link component props for this route.
-Generally you don't need this function and it's
-beter to use the @Ref(Router/Link) component.
-
-
-
-
-##### Parameters
-
-| Name | Type | Description |  |
-| ---- | ---- | ----------- | -------- |
-| data | `Object`  |  | &nbsp; |
-| options | `Object`  |  | &nbsp; |
-
-
-
-
-##### Returns
-
-
-- `Object`  
-
-
-
-#### toJSON() 
-
-Returns the JSON representation of the route.
-
-
-
-
-
-
-##### Returns
-
-
-- `Object`  
 
 
 

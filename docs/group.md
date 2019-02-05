@@ -41,7 +41,7 @@ Also see [Route.as](https://github.com/samueljoos/next-avenues/blob/master/docs/
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| name | `string`  | Prefix for the route names. A **.** will be used as seperator. | &nbsp; |
+| name | `string`  | Prefix for the route names seperated by a '.'. | &nbsp; |
 
 
 

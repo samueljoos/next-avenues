@@ -90,8 +90,8 @@ Creates a new route which resolves to a Next.js page component.
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| route | `string`  |  | &nbsp; |
-| page | `string`  |  | &nbsp; |
+| route | `string`  | The route name. | &nbsp; |
+| page | `string`  | The Next.js page component. | &nbsp; |
 
 
 
