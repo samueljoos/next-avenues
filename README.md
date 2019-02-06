@@ -117,10 +117,10 @@ export default class App extends React.Component {
 		return { pageProps, route };
 	}
 	render() {
-		const { Component, pageProps } = this.props;
+		const { Component, pageProps, route } = this.props;
 		return (
 			<Container>
-			    <Component {...pageProps} />
+			    <Component {...pageProps} route={route}/>
 			</Container>
 		);
 	}
