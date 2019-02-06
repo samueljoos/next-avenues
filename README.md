@@ -37,9 +37,50 @@ module.exports = router;
 
 The routes file will be used by the server and the client.
 
+### Server implementation
+Create a custom **server.js** and implement the [router.getRequestHandler](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#routergetrequesthandlerapp-customhandler) middleware.
+For more information about creating a custom next.js server configuration goto [Next.js documentation](https://github.com/zeit/next.js/#custom-server-and-routing)
+
+**Example implementation:**
+```js
+// ./server.js
+const next = require('next');
+const http = require('http');
+const router = require('./routes');
+const port = 3002;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handleNextRequests = router.getRequestHandler(app);
+
+app.prepare().then(() => {
+    const server = new http.Server((req, res) => {
+        app.setAssetPrefix('');
+        return handleNextRequests(req, res);
+    });
+
+    server.listen(port, (err) => {
+        if (err) {
+            throw err;
+        }
+
+        console.log(`> Ready on http://localhost:${port}`);
+    });
+});
+```
+
+Replace the scripts part in your **package.json** file with following configuration:
+
+```json
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  }
+```
+
 ### The page component (the basic implementation)
 
-To get the route data you need to import the routes.js file and call the getCurrentRoute() function.
+To get the route data you need to import the **routes.js** file and call the [router.getCurrentRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#routergetcurrentroute) function.
 
 ```js
 // ./pages/BlogItem.js
@@ -58,7 +99,7 @@ export default class BlogItem extends React.Component {
 
 ### The page component (the advanced implementation)
 
-Most of the times you'll want an \_app.js component which does the call to your current route and passes it down to your page component.
+Most of the times you'll want an **_app.js** component which does the call to your current route and passes it down to your page component.
 
 ```js
 // ./pages/_app.js
@@ -103,9 +144,9 @@ export default class BlogItem extends React.Component {
 
 ## Link component
 
-Use the Link component to generate links based on route name
+Use the [Link](https://github.com/samueljoos/next-avenues/blob/master/docs/link.md) component to generate links based on route name
 
-For example consider following routes.js in the root of your project.
+For example consider following **routes.js** in the root of your project.
 ```js
 // ./routes.js
 const router = require('next-avenues');
@@ -123,7 +164,7 @@ router
 
 module.exports = router;
 ```
-
+Then you can for example create following [Link](https://github.com/samueljoos/next-avenues/blob/master/docs/link.md) instances:
 ```js
 // ./components/LinkExample.js
 import { Link } from 'next-avenues';
