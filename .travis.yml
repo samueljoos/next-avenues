@@ -1,21 +1,26 @@
-{
-  sudo: "required",
-  dist: "trusty",
-  addons: {
-    apt: {
-      sources: ["google-chrome"],
-      packages: ["google-chrome-stable"]
-    }
-  },
-  language: "node_js",
-  node_js: ["8", "10"],
-  cache: {
-    directories: ["node_modules"]
-  },
-  before_cache: [
-    "rm -rf node_modules/.cache"
-  ],
-  before_script: [
-    "npm install -g doxdox"
-  ]
-}
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+language: node_js
+node_js:
+- '8'
+- '10'
+cache:
+  directories:
+  - node_modules
+before_cache:
+- rm -rf node_modules/.cache
+deploy:
+  provider: npm
+  email: info@samueljoos.be
+  skip_cleanup: true
+  api_key:
+    secure: jdRXsjAlkkv8yJWmtfTr8h4UEeXdSl/WMkVxc4fXzgrVGlDVGnYJJSiSWAgH2v7wif9z+yLRaQDp34fsBT/mzWbp8C53iIU01d09RlA15vzlZI0pcZzv63SA/zMNf7mY3ZAhzHTKr3rXsw3e11wMrZ9+14c1zsOLm0gIdJwaLZnix7PjOY1WfVSINYpYFIBwTxi4/dO2i0aOLV3fL2Bf8xEelmxBXzUtW6esmjEFTJEOFstfOTSNs1QXo28ZHh1zN7HIjC3pitNX11KFZgVh0E+icn+v2T2ACz8AkLCHbSrRer0UNexzDf2XPCpfYwxfFnIAP3ReVk8zQqej6M6yDEreTth5QELt8T0BBkm1oFldYo2XBuQFNyVrzm0J8BEXCmkqJaUJBolFtmBwx/KCSrhcvt0N+TvXaIAKCCuq2na9PBuYDPTLCkFXeQx2MhIrkAavxdAJ+HMR8Apgx+i+w8LuBrTZMGmjwEhb6hn5j0FlCh2sJKGKzF80SpNGB37btaO153WOJhEzorpcep6OxgieAMJR38Ml5fUoXBi7vzFIbX+9G0soB6jyGuVTT37JCHQGuBSqs01j1BpxhE5yQMD19O6jWAFOZipPQWKg0Mk8//n2BMUR6a/bK5c483MVntBjHg1QjuU0SkxfMOs6lCtgFuhAmeFmx3W/4+PKrSE=
+  on:
+    tags: true
+    repo: samueljoos/next-avenues

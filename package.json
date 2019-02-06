@@ -8,9 +8,11 @@
     "start": "babel --watch -d lib/ src/",
     "compile": "babel -d lib/ src/",
     "preversion": "npm run test && npm run compile",
-    "version": "./generate-docs",
-    "test": "eslint ./src && jest tests",
-    "docs": ""
+    "version": "npm run docs",
+    "pretest": "npm run lint",
+    "test": "jest tests",
+    "docs": "./generate-docs",
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",
