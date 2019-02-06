@@ -8,7 +8,13 @@
 
 #### Link(props) 
 
-Link component for react.
+Link component based on [next/link](https://github.com/zeit/next.js/#with-link)
+It is possible to use this component exactly the same as Next.js <Link> component but it has some extra props.
+
+- **name** Route name
+- **params** Route parameters (note: this is also the place to define your subdomain variables)
+- **domain** Route domain (note: if the domain differs from the current active domain push state won't be triggered)
+- **query** Aditional query parameters
 
 
 

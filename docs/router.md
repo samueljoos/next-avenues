@@ -75,39 +75,7 @@ static routes.
 
 
 
-#### matchingRoute() 
-
-Find the first matching route.
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### if() 
-
-Return null when unable to find a route.
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### group(callback[, name]) 
+#### Router.group(callback[, name]) 
 
 Create a group of routes.
 Also see [Group](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md).
@@ -142,24 +110,7 @@ routes.group(() => {
 
 
 
-#### group() 
-
-Create a new group and pass all the routes
-to the group.
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### list() 
+#### Router.list() 
 
 Returns an array of all the registered routes
 
@@ -175,7 +126,7 @@ Returns an array of all the registered routes
 
 
 
-#### getCurrentRoute() 
+#### Router.getCurrentRoute() 
 
 Return the current active route.
 This is usualy called inside the getInitialProps a Next.js page component.
@@ -192,7 +143,7 @@ This is usualy called inside the getInitialProps a Next.js page component.
 
 
 
-#### getRequestHandler(app[, customHandler]) 
+#### Router.getRequestHandler(app[, customHandler]) 
 
 Middleware function for your nextjs server setup.
 
@@ -216,7 +167,7 @@ Middleware function for your nextjs server setup.
 
 
 
-#### _initialize()  *private method*
+#### Router._initialize()  *private method*
 
 Initialize the client url location data
 
@@ -232,7 +183,7 @@ Initialize the client url location data
 
 
 
-#### _validateGroupClosure(callback)  *private method*
+#### Router._validateGroupClosure(callback)  *private method*
 
 Validates the group closure to make sure
 it is a function
@@ -256,7 +207,7 @@ it is a function
 
 
 
-#### _validateNestedGroups()  *private method*
+#### Router._validateNestedGroups()  *private method*
 
 Validates that nested groups are not created.
 
