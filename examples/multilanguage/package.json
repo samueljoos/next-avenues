@@ -20,7 +20,7 @@
   "homepage": "https://github.com/samueljoos/next-avenues#readme",
   "dependencies": {
     "next": "^7.0.2",
-    "next-avenues": "^0.3.0",
+    "next-avenues": "^0.3.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   }
