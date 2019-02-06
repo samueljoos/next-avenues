@@ -1,4 +1,4 @@
-# [next-avenues](https://github.com/samueljoos/next-avenues) *0.3.3*
+# [next-avenues](https://github.com/samueljoos/next-avenues) *0.4.0*
 
 > A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes
 
