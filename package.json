@@ -1,6 +1,6 @@
 {
   "name": "next-avenues",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes",
   "main": "lib/index.js",
   "browser": "lib/index.js",
