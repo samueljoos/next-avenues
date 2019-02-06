@@ -6,7 +6,6 @@ const pages = () => {
     router.add('/b', 'b').as('b');
 };
 
-router.group(pages).prefix('nl').data({ lang: 'nl' });
-router.group(pages).prefix('fr').data({ lang: 'fr' });
+router.group(pages).prefix(':lang(nl|fr)');
 
 module.exports = router;

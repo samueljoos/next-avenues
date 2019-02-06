@@ -1,7 +1,7 @@
 import Link from './link';
 
 const Nav = ({ route }) => (
-    route.data ?
+    route.params ?
         <nav >
             <ul>
                 <li><Link name='homepage'><a>Homepage</a></Link></li>

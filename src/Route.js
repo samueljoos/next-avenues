@@ -207,8 +207,7 @@ class Route {
 		 */
 
         compiledDomain = options.domain || compiledDomain;
-
-        if (compiledDomain !== this.router.domain) {
+        if (compiledDomain && compiledDomain !== this.router.domain) {
             const protocol = options.protocol || this.router.protocol;
             const port = this.router.port ? ':' + this.router.port : '';
             return `${protocol}://${compiledDomain}${port}${compiledRoute}`;
