@@ -4,3 +4,4 @@ doxdox 'src/Route.js' --layout markdown --output docs/route.md
 doxdox 'src/Group.js' --layout markdown --output docs/group.md
 doxdox 'src/Store.js' --layout markdown --output docs/store.md
 doxdox 'src/Link.js' --layout markdown --output docs/link.md
+git add .

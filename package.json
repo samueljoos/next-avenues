@@ -7,7 +7,8 @@
   "scripts": {
     "start": "babel --watch -d lib/ src/",
     "compile": "babel -d lib/ src/",
-    "prepublish": "npm run test && ./generate-docs && npm run compile",
+    "preversion": "npm run test && npm run compile",
+    "version": "./generate-docs",
     "test": "eslint ./src && jest tests",
     "docs": ""
   },
