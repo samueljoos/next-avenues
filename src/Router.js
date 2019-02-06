@@ -66,7 +66,7 @@ class Router {
         const { pathname, query } = parsedUrl;
         let resolvedUrl = {};
 
-        /**
+        /*
 		 * Find the first matching route.
 		 */
         const matchingRoute = RouteStore.list().find(route => {
@@ -74,7 +74,7 @@ class Router {
             return resolvedUrl;
         });
 
-        /**
+        /*
 		 * Return null when unable to find a route.
 		 */
         if (!matchingRoute) {
@@ -116,7 +116,7 @@ class Router {
         RouteStore.breakpoint(name);
         callback();
 
-        /**
+        /*
 		 * Create a new group and pass all the routes
 		 * to the group.
 		 */
