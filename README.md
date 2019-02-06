@@ -188,3 +188,7 @@ const LinkExample = () => (
 - [Route](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md)
 - [Group](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md)
 - [Store](https://github.com/samueljoos/next-avenues/blob/master/docs/store.md)
+
+## Examples
+- [Multilanguage domains](https://github.com/samueljoos/next-avenues/tree/master/examples/multilanguage-domains)
+- [Multilanguage](https://github.com/samueljoos/next-avenues/tree/master/examples/multilanguage)

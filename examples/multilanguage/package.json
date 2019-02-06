@@ -1,0 +1,27 @@
+{
+  "name": "page-transitions",
+  "version": "1.0.0",
+  "description": "Example of page transistions with Next.js and next-avenues",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samueljoos/next-avenues.git"
+  },
+  "author": "Samuel Joos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samueljoos/next-avenues/issues"
+  },
+  "homepage": "https://github.com/samueljoos/next-avenues#readme",
+  "dependencies": {
+    "next": "^7.0.2",
+    "next-avenues": "^0.3.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  }
+}
