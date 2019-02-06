@@ -142,8 +142,8 @@ const LinkExample = () => (
 
 ## Api documentation
 
+- [Link](https://github.com/samueljoos/next-avenues/blob/master/docs/link.md)
 - [Router](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md)
 - [Route](https://github.com/samueljoos/next-avenues/blob/master/docs/route.md)
 - [Group](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md)
 - [Store](https://github.com/samueljoos/next-avenues/blob/master/docs/store.md)
-- [Link](https://github.com/samueljoos/next-avenues/blob/master/docs/link.md)

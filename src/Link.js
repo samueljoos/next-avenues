@@ -9,8 +9,8 @@ import { default as NextLink } from 'next/link';
  *
  * - **name** Route name
  * - **params** Route parameters (note: this is also the place to define your subdomain variables)
- * - **domain** Route domain (note: if the domain differs from the current active domain push state won't be triggered)
- * - **query** Aditional query parameters
+ * - **domain** Route domain (note: if the domain differs from the current active domain, push state won't be triggered)
+ * - **query** Additional query parameters
  *
  * @function Link
  *
