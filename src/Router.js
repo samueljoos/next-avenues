@@ -15,6 +15,7 @@ import RouteGroup from './Group';
 import RouteStore from './Store';
 import { parse } from 'url';
 import { errorMessage } from './utils';
+import NextRouter from 'next/router';
 
 /**
  * @description
@@ -218,6 +219,9 @@ class Router {
             this.port = document.location.port;
             this.domain = document.location.host.split(':')[0];
             this.protocol = document.location.protocol.split(':')[0];
+            NextRouter.events.on('routeChangeStart', (url) => {
+                this.path = url;
+            });
         }
     }
 
