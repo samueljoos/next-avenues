@@ -1,4 +1,6 @@
 # Next Avenues
+
+[![npm version](https://badge.fury.io/js/next-avenues.svg)](https://badge.fury.io/js/next-avenues)
 [![Build Status](https://travis-ci.org/samueljoos/next-avenues.svg?branch=master)](https://travis-ci.org/samueljoos/next-avenues)
 
 A fancy dynamic router for [Next.js](https://nextjs.org/) heavily inspired on [Adonis.js](https://adonisjs.com/) and [next-routes](https://github.com/fridays/next-routes)
