@@ -196,8 +196,38 @@ describe('resolving routes', () => {
         expect(page).toBe('group-domain-first');
     });
 
-    it('for a route in a subdomain group', () => {
-        const { page } = router.match('/subdomain-first', 'subdomain.test');
-        expect(page).toBe('group-subdomain-first');
+    it('for a missing route', () => {
+        const match = router.match('/missing-route', router.domain);
+        expect(JSON.stringify(match)).toBe('{}');
+    });
+});
+
+
+describe('get current route', () => {
+    it('path / should not exist', () => {
+        const route = router.getCurrentRoute();
+        expect(JSON.stringify(route)).toBe('{}');
+    });
+
+    it('path /group-prefix/first should exist', () => {
+        router.path = '/group-prefix/first';
+        const { page } = router.getCurrentRoute();
+        expect(page).toBe('group-prefix-first');
+    });
+});
+
+describe('Request handler', () => {
+    const setup = url => {
+        router.path = '/';
+        const nextHandler = jest.fn();
+        const app = { getRequestHandler: () => nextHandler, render: jest.fn() };
+        return { app, req: { url, headers: { host: router.domain }}, res: {}};
+    };
+
+    test('find route and call render', () => {
+        const { app, req, res } = setup('/');
+        const route = router.add('/', 'index');
+        router.getRequestHandler(app)(req, res);
+        expect(app.render).toBeCalledWith(req, res, '/' + route.page, {});
     });
 });
