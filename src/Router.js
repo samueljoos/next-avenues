@@ -231,7 +231,7 @@ class Router {
      *
      * @example
      * router.add('/post/:slug','blog-post').as('blog-post');
-     * router.pushRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+     * router.replaceRoute('blog-post', {slug:'post-slug'}, {order:'1'});
      * // resolves to /post/post-slug?order=1
      */
     replaceRoute(name, params, query) {
@@ -240,7 +240,7 @@ class Router {
 
     /**
      * @description
-     * Prefetch the route.
+     * Prefetch a route
      * **note:** This doesn't work serverside.
      *
      * @param {string} name The route name.
@@ -249,8 +249,8 @@ class Router {
      *
      * @example
      * router.add('/post/:slug','blog-post').as('blog-post');
-     * router.pushRoute('blog-post', {slug:'post-slug'}, {order:'1'});
-     * // resolves to /post/post-slug?order=1
+     * router.prefetchRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+     * // prefetches the data for /post/post-slug?order=1
      */
     prefetchRoute(name, params, query) {
         this._browserHistoryApply('prefetch', name, params, query);
