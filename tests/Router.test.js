@@ -224,10 +224,33 @@ describe('Request handler', () => {
         return { app, req: { url, headers: { host: router.domain }}, res: {}};
     };
 
-    test('find route and call render', () => {
+    it('find route and call render', () => {
         const { app, req, res } = setup('/');
         const route = router.add('/', 'index');
         router.getRequestHandler(app)(req, res);
         expect(app.render).toBeCalledWith(req, res, '/' + route.page, {});
+    });
+});
+
+describe('Browser history methods', () => {
+    const setup = (method) => {
+        router.NextRouter = {
+            push: jest.fn(),
+            replace: jest.fn(),
+            prefetch: jest.fn()
+        };
+        router[`${method}Route`]('group-prefix-first', {}, { a: 'a' });
+        expect(router.NextRouter[method]).toHaveBeenCalledWith('/group-prefix-first', '/group-prefix/first?a=a');
+    };
+    it('pushRoute', () => {
+        setup('push');
+    });
+
+    it('replaceRoute', () => {
+        setup('replace');
+    });
+
+    it('prefetchRoute', () => {
+        setup('prefetch');
     });
 });
