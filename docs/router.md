@@ -167,6 +167,111 @@ Middleware function for your nextjs server setup.
 
 
 
+#### Router.pushRoute(name[, params, query]) 
+
+Push State helper for navigating to a route.
+**note:** This doesn't work serverside.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| name | `string`  | The route name. | &nbsp; |
+| params | `Object`  | The route parameters. | *Optional* |
+| query | `Object`  | The route query parameters. | *Optional* |
+
+
+
+
+##### Examples
+
+```javascript
+router.add('/post/:slug','blog-post').as('blog-post');
+router.pushRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+// resolves to /post/post-slug?order=1
+```
+
+
+##### Returns
+
+
+- `Void`
+
+
+
+#### Router.replaceRoute(name[, params, query]) 
+
+Replace State helper for navigating to a route.
+**note:** This doesn't work serverside.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| name | `string`  | The route name. | &nbsp; |
+| params | `Object`  | The route parameters. | *Optional* |
+| query | `Object`  | The route query parameters. | *Optional* |
+
+
+
+
+##### Examples
+
+```javascript
+router.add('/post/:slug','blog-post').as('blog-post');
+router.replaceRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+// resolves to /post/post-slug?order=1
+```
+
+
+##### Returns
+
+
+- `Void`
+
+
+
+#### Router.prefetchRoute(name[, params, query]) 
+
+Prefetch a route
+**note:** This doesn't work serverside.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| name | `string`  | The route name. | &nbsp; |
+| params | `Object`  | The route parameters. | *Optional* |
+| query | `Object`  | The route query parameters. | *Optional* |
+
+
+
+
+##### Examples
+
+```javascript
+router.add('/post/:slug','blog-post').as('blog-post');
+router.prefetchRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+// prefetches the data for /post/post-slug?order=1
+```
+
+
+##### Returns
+
+
+- `Void`
+
+
+
 #### Router._initialize()  *private method*
 
 Initialize the client url location data
@@ -212,6 +317,33 @@ it is a function
 Validates that nested groups are not created.
 
 
+
+
+
+
+##### Returns
+
+
+- `Void`
+
+
+
+#### Router._browserHistoryApply(method, name, params, query) 
+
+Helper function for browser history methods.
+Used by [router.pushRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#pushroutenameparamsquery) [router.replaceRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#replaceroutenameparamsquery) [router.prefetchRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#prefetchroutenameparamsquery)
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| method | `string`  | Should be one of push, replace or prefetch. | &nbsp; |
+| name | `string`  | The route name. | &nbsp; |
+| params | `Object`  | The route Params. | &nbsp; |
+| query | `Object`  | The route query. | &nbsp; |
 
 
 

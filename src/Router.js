@@ -29,6 +29,7 @@ import NextRouter from 'next/router';
 class Router {
     constructor() {
         this.getRequestHandler = this.getRequestHandler.bind(this);
+        this.NextRouter = NextRouter;
         this._initialize();
     }
 
@@ -200,6 +201,61 @@ class Router {
         };
     }
 
+    /**
+     * @description
+     * Push State helper for navigating to a route.
+     * **note:** This doesn't work serverside.
+     *
+     * @param {string} name The route name.
+     * @param {Object} [params] The route parameters.
+     * @param {Object} [query] The route query parameters.
+     *
+     * @example
+     * router.add('/post/:slug','blog-post').as('blog-post');
+     * router.pushRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+     * // resolves to /post/post-slug?order=1
+     */
+    pushRoute(name, params, query) {
+        this._browserHistoryApply('push', name, params, query);
+    }
+
+
+    /**
+     * @description
+     * Replace State helper for navigating to a route.
+     * **note:** This doesn't work serverside.
+     *
+     * @param {string} name The route name.
+     * @param {Object} [params] The route parameters.
+     * @param {Object} [query] The route query parameters.
+     *
+     * @example
+     * router.add('/post/:slug','blog-post').as('blog-post');
+     * router.replaceRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+     * // resolves to /post/post-slug?order=1
+     */
+    replaceRoute(name, params, query) {
+        this._browserHistoryApply('replace', name, params, query);
+    }
+
+    /**
+     * @description
+     * Prefetch a route
+     * **note:** This doesn't work serverside.
+     *
+     * @param {string} name The route name.
+     * @param {Object} [params] The route parameters.
+     * @param {Object} [query] The route query parameters.
+     *
+     * @example
+     * router.add('/post/:slug','blog-post').as('blog-post');
+     * router.prefetchRoute('blog-post', {slug:'post-slug'}, {order:'1'});
+     * // prefetches the data for /post/post-slug?order=1
+     */
+    prefetchRoute(name, params, query) {
+        this._browserHistoryApply('prefetch', name, params, query);
+    }
+
     //////
     // Private functions
     //////
@@ -219,7 +275,7 @@ class Router {
             this.port = document.location.port;
             this.domain = document.location.host.split(':')[0];
             this.protocol = document.location.protocol.split(':')[0];
-            NextRouter.events.on('routeChangeStart', (url) => {
+            this.NextRouter.events.on('routeChangeStart', (url) => {
                 this.path = url;
             });
         }
@@ -259,6 +315,26 @@ class Router {
                 'E_NESTED_ROUTE_GROUPS'
             );
         }
+    }
+
+    /**
+     * @description
+     * Helper function for browser history methods.
+     * Used by [router.pushRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#pushroutenameparamsquery) [router.replaceRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#replaceroutenameparamsquery) [router.prefetchRoute](https://github.com/samueljoos/next-avenues/blob/master/docs/router.md#prefetchroutenameparamsquery)
+     *
+     * @param {string} method Should be one of push, replace or prefetch.
+     * @param {string} name The route name.
+     * @param {Object} params The route Params.
+     * @param {Object} query The route query.
+     */
+    _browserHistoryApply(method, name, params, query) {
+        if (typeof window === 'undefined') {
+            throw errorMessage('Pushing routes is only available in the client', 'router.push');
+        }
+
+        const route = RouteStore.find(name, this.domain);
+        const nextLinkProps = route.getNextLinkProps(params, { domain: this.domain, protocol: this.protocol, query });
+        this.NextRouter[method](nextLinkProps.href, nextLinkProps.as);
     }
 }
 
