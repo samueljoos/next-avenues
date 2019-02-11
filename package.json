@@ -10,6 +10,7 @@
     "preversion": "npm run test && npm run compile",
     "version": "npm run docs",
     "pretest": "npm run lint",
+    "prepublish": "npm run compile",
     "local-test": "jest tests --coverage",
     "test": "jest tests --coverage --coverageReporters=text-lcov | coveralls",
     "docs": "./generate-docs",
