@@ -24,7 +24,7 @@ Create a routes.js file inside your project
 
 ```js
 // ./routes.js
-const router = require('next-avenues');
+const { router } = require('next-avenues');
 
 router.add('/', 'index').as('homepage');
 router.add('/blog-item/:slug', 'blog').as('blog-item');
@@ -108,25 +108,31 @@ Most of the times you'll want an **_app.js** component which does the call to yo
 import React from 'react';
 import App, { Container } from 'next/app';
 import routes from '../routes';
-export default class App extends React.Component {
-	static async getInitialProps() {
+
+export default class MyApp extends App {
+	static async getInitialProps({ Component, ctx }) {
 		let pageProps = {};
-		// Retrieve the current route data
+		// Get current route info.
 		const route = routes.getCurrentRoute();
+
 		if (Component.getInitialProps) {
 			pageProps = await Component.getInitialProps(ctx, route);
-		}
+        }
+
 		return { pageProps, route };
 	}
+
 	render() {
 		const { Component, pageProps, route } = this.props;
+
 		return (
 			<Container>
-			    <Component {...pageProps} route={route}/>
+				<Component {...pageProps} route={ route }/>
 			</Container>
 		);
 	}
 }
+
 ```
 
 Now you can access the route data in every page component like this:
