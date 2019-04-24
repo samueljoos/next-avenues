@@ -23,6 +23,52 @@ routes, groups and Link components.
 
 
 
+#### Router.setCtx(ctx) 
+
+Set the context of your page. Only needed when you want to do a static next export
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| ctx | `Object`  |  | &nbsp; |
+
+
+
+
+##### Returns
+
+
+-  
+
+
+
+#### Router.withExportPathMap(config) 
+
+Dynamicly create an exportPathMap config for static next exports based on your routes.js
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| config | `Object`  |  | &nbsp; |
+
+
+
+
+##### Returns
+
+
+- `Object`  
+
+
+
 #### Router.add(route, page) 
 
 Creates a new route which resolves to a Next.js page component.

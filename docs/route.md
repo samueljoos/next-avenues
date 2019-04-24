@@ -97,6 +97,42 @@ router
 
 
 
+#### export(callback) 
+
+Add an async callback function returning an array of objects with route parameters to generate all dynamic export paths.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| callback | `Function`  |  | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+router.add('/page/:uid', 'page')
+  .as('page')
+  .export(() => [
+      {uid: 'test'},
+      {uid: 'test123'},
+      {uid: 'test1234'}
+  ]);
+```
+
+
+##### Returns
+
+
+- `Route`  
+
+
+
 #### prefix(prefix) 
 
 Prefix the route with some string.
