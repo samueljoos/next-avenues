@@ -80,6 +80,25 @@ class Route {
 
     /**
      * @description
+     * Add an async callback function returning an array of objects with route parameters to generate all dynamic export paths.
+     * @param {Function} callback
+     * @returns {Route}
+     * @example
+     * router.add('/page/:uid', 'page')
+     *   .as('page')
+     *   .export(() => [
+     *       {uid: 'test'},
+     *       {uid: 'test123'},
+     *       {uid: 'test1234'}
+     *   ]);
+     */
+    export(callback) {
+        this._export = callback;
+        return this;
+    }
+
+    /**
+     * @description
      * Prefix the route with some string.
      * Generally used via [Group.prefix](https://github.com/samueljoos/next-avenues/blob/master/docs/group.md#prefixprefix) to prefix a bunch of routes.
      *

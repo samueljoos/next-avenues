@@ -29,8 +29,62 @@ import NextRouter from 'next/router';
 class Router {
     constructor() {
         this.getRequestHandler = this.getRequestHandler.bind(this);
+        this.withExportPathMap = this.withExportPathMap.bind(this);
+        this.setCtx = this.setCtx.bind(this);
         this.NextRouter = NextRouter;
         this._initialize();
+    }
+
+    /**
+     * @description
+     * Creates a new route which resolves to a Next.js page component.
+     * @function add
+     * @param {string} route The route name.
+     * @param {string} page The Next.js page component.
+     * @return {Route}
+     */
+
+    /**
+     * @description
+     * Set the context of your page. Only needed when you want to do a static next export
+     * @function setCtx
+     * @param {Object} ctx
+     * @returns {void}
+     */
+    setCtx(ctx) {
+        this.ctx = ctx;
+    }
+
+    /**
+     * @description
+     * Dynamicly create an exportPathMap config for static next exports based on your routes.js
+     * @function withExportPathMap
+     * @param {Object} config
+     * @returns {Object}
+     */
+    withExportPathMap(config) {
+        return {
+            ...config,
+            exportPathMap: async() => {
+                const pages = {};
+
+                await Promise.all(this.list().map(async(route) => {
+                    if (route._keys.length && route._export) {
+                        const exportParams = await route._export(route);
+
+                        exportParams.forEach((params) => {
+                            const resolvedRoute = route.getNextLinkProps(params, { domain: this.domain, protocol: this.protocol });
+                            pages[resolvedRoute.as] = { page: resolvedRoute.href, query: params };
+                        });
+                    } else {
+                        const resolvedRoute = route.getNextLinkProps({}, { domain: this.domain, protocol: this.protocol });
+                        pages[resolvedRoute.as] = { page: resolvedRoute.href };
+                    }
+                }));
+
+                return pages;
+            }
+        };
     }
 
     /**
@@ -152,15 +206,15 @@ class Router {
      * @returns {Object}
      */
     getCurrentRoute() {
-        let path;
+        const path = this.currentUrl || (this.ctx && this.ctx.req && this.ctx.req.url) || this.path || document.location.href;
         let domain;
+
         if (typeof window !== 'undefined') {
-            path = this.path || document.location.href;
             domain = document.location.host;
         } else {
-            path = this.currentUrl;
-            domain = this.currentHost;
+            domain = this.currentHost || 'localhost:3000';
         }
+
         return this.match(path, domain);
     }
 

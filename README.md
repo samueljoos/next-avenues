@@ -27,7 +27,14 @@ Create a routes.js file inside your project
 const { router } = require('next-avenues');
 
 router.add('/', 'index').as('homepage');
-router.add('/blog-item/:slug', 'blog').as('blog-item');
+router.add('/blog-item/:slug', 'blog')
+	.as('blog-item')
+	.export(async() => {
+		return [
+			{ slug: 'my-first-article' },
+			{ slug: 'another-article' }
+		]
+	})
 router
 	.group(() => {
 		router.add('/', 'admin-dashboard').as('admin-dashboard');
@@ -77,6 +84,28 @@ Replace the scripts part in your **package.json** file with following configurat
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
+  }
+```
+
+### Static export implementation
+Create a **next.config.js** file and implement the **withExportPathMap** function.
+This will automaticly generate the next.js [exportPathMap](https://github.com/zeit/next.js/#static-html-export) config based up on your routes.js file and the [export function]()
+**Example implementation**
+```js
+//./next-config.js
+const routes = require('./routes');
+
+module.exports = routes.withExportPathMap({});
+
+```
+
+Replace the scripts part in your **package.json** file with following configuration:
+
+```json
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "export": "next export"
   }
 ```
 
