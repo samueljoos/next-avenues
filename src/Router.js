@@ -68,18 +68,20 @@ class Router {
             exportPathMap: async() => {
                 const pages = {};
 
-                await Promise.all(this.list().map(async(route) => {
-                    if (route._keys.length && route._export) {
-                        const exportParams = await route._export(route);
+                await Promise.all([this.domain, ...RouteStore._domains].map(async(domain) => {
+                    await Promise.all(this.list().map(async(route) => {
+                        if (route._keys.length && route._export) {
+                            const exportParams = await route._export(route);
 
-                        exportParams.forEach((params) => {
-                            const resolvedRoute = route.getNextLinkProps(params, { domain: this.domain, protocol: this.protocol });
-                            pages[resolvedRoute.as] = { page: resolvedRoute.href, query: params };
-                        });
-                    } else {
-                        const resolvedRoute = route.getNextLinkProps({}, { domain: this.domain, protocol: this.protocol });
-                        pages[resolvedRoute.as] = { page: resolvedRoute.href };
-                    }
+                            exportParams.forEach((params) => {
+                                const resolvedRoute = route.getNextLinkProps(params, { domain, protocol: this.protocol || 'http' }, true);
+                                pages[resolvedRoute.as.replace(/.*\:\/\//, '').replace('.', '_ext_')] = { page: resolvedRoute.href, query: params };
+                            });
+                        } else {
+                            const resolvedRoute = route.getNextLinkProps({}, { domain, protocol: this.protocol || 'http' }, true);
+                            pages[resolvedRoute.as.replace(/.*\:\/\//, '').replace('.', '_ext_')] = { page: resolvedRoute.href };
+                        }
+                    }));
                 }));
 
                 return pages;
@@ -206,7 +208,9 @@ class Router {
      * @returns {Object}
      */
     getCurrentRoute() {
-        const path = this.currentUrl || (this.ctx && this.ctx.req && this.ctx.req.url) || this.path || document.location.href;
+        let path = this.currentUrl || (this.ctx && this.ctx.req && this.ctx.req.url) || this.path || document.location.href;
+        path = path.replace('_ext_', '.');
+
         let domain;
 
         if (typeof window !== 'undefined') {
@@ -214,6 +218,13 @@ class Router {
         } else {
             domain = this.currentHost || 'localhost:3000';
         }
+
+        RouteStore._domains.forEach((d) => {
+            if (path.indexOf(d) === 0) {
+                domain = d;
+                path = path.replace(d, '');
+            }
+        });
 
         return this.match(path, domain);
     }

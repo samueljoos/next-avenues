@@ -10,6 +10,8 @@
  * file that was distributed with this source code.
 */
 
+import RouteStore from './Store';
+
 /**
  * Group class is used to group routes with
  * common behavior. For example prefixing a bunch
@@ -98,6 +100,7 @@ class Group {
      *   .domain('next-avenues.com')
      */
     domain(domain) {
+        RouteStore._addDomain(domain);
         this._routes.forEach((route) => route.domain(domain));
         return this;
     }

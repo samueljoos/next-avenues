@@ -23,6 +23,7 @@
 class Store {
     constructor() {
         this._routes = [];
+        this._domains = [];
         this.releaseBreakpoint();
     }
 
@@ -98,6 +99,10 @@ class Store {
             this._breakpoint.routes.push(route);
         }
         this._routes.push(route);
+    }
+
+    _addDomain(domain) {
+        this._domains.indexOf(domain) === -1 && this._domains.push(domain);
     }
 
     /**

@@ -12,6 +12,7 @@
 
 import pathToRegexp from 'path-to-regexp';
 import { toQuerystring, errorMessage } from './utils';
+import RouteStore from './Store';
 
 /**
  * This class defines a single route. It supports dynamic
@@ -49,6 +50,7 @@ class Route {
      *   .domain('blog.next-avenues.org')
      */
     domain(domain) {
+        RouteStore._addDomain(domain);
         this.domainKeys = [];
         const cleanDomain = `${domain.replace(/^\/|\/$/g, '')}`;
         this.forDomain = pathToRegexp(cleanDomain, this.domainKeys);
@@ -259,13 +261,14 @@ class Route {
      *
      * @param {Object.<string, string>} [params] Data to build the url path.
      * @param {{protocol: ?string, domain: ?string, query:?Object.<string, string>}} [options] Options object.
+     * @param {boolean} forExport Options object.
      *
      * @returns {Object}
      */
-    getNextLinkProps(params = {}, options = {}) {
+    getNextLinkProps(params = {}, options = {}, forExport = false) {
         const url = this.getUrl(params, options);
         const protocol = options.protocol || this.router.protocol;
-        if (url.indexOf(protocol) === 0) {
+        if (url.indexOf(protocol) === 0 && !forExport) {
             return {
                 href: url
             };
