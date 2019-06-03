@@ -1,4 +1,4 @@
-# [next-avenues](https://github.com/samueljoos/next-avenues) *0.7.0*
+# [next-avenues](https://github.com/samueljoos/next-avenues) *0.8.0*
 
 > A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes
 
@@ -271,7 +271,7 @@ Get the Next.js page component name.
 
 
 
-#### getNextLinkProps([params, options]) 
+#### getNextLinkProps([params, options], forExport) 
 
 Get the next/link component props for this route.
 Generally you don't need this function and it's
@@ -286,6 +286,7 @@ beter to use the @Ref(Router/Link) component.
 | ---- | ---- | ----------- | -------- |
 | params | `Object.<string, string>`  | Data to build the url path. | *Optional* |
 | options | `[object Object]`  | Options object. | *Optional* |
+| forExport | `boolean`  | Options object. | &nbsp; |
 
 
 
