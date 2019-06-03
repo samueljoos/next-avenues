@@ -75,11 +75,11 @@ class Router {
 
                             exportParams.forEach((params) => {
                                 const resolvedRoute = route.getNextLinkProps(params, { domain, protocol: this.protocol || 'http' }, true);
-                                pages[resolvedRoute.as.replace(/.*\:\/\//, '').replace('.', '_ext_')] = { page: resolvedRoute.href, query: params };
+                                pages[resolvedRoute.as.replace(/.*\:\/\//, '').split('.').join('_dot_')] = { page: resolvedRoute.href, query: params };
                             });
                         } else {
                             const resolvedRoute = route.getNextLinkProps({}, { domain, protocol: this.protocol || 'http' }, true);
-                            pages[resolvedRoute.as.replace(/.*\:\/\//, '').replace('.', '_ext_')] = { page: resolvedRoute.href };
+                            pages[resolvedRoute.as.replace(/.*\:\/\//, '').split('.').join('_dot_')] = { page: resolvedRoute.href };
                         }
                     }));
                 }));
@@ -209,7 +209,7 @@ class Router {
      */
     getCurrentRoute() {
         let path = this.currentUrl || (this.ctx && this.ctx.req && this.ctx.req.url) || this.path || document.location.href;
-        path = path.replace('_ext_', '.');
+        path = path.split('_dot_').join('.');
 
         let domain;
 
