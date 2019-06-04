@@ -1,4 +1,4 @@
-# [next-avenues](https://github.com/samueljoos/next-avenues) *0.8.1*
+# [next-avenues](https://github.com/samueljoos/next-avenues) *0.8.2*
 
 > A fancy dynamic router for Next.js heavily inspired on Adonis.js and next-routes
 
@@ -23,7 +23,7 @@ routes, groups and Link components.
 
 
 
-#### Router.setCtx(ctx) 
+#### Router.setCtx(ctx, protocol) 
 
 Set the context of your page. Only needed when you want to do a static next export
 
@@ -35,6 +35,7 @@ Set the context of your page. Only needed when you want to do a static next expo
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
 | ctx | `Object`  |  | &nbsp; |
+| protocol | `string`  |  | &nbsp; |
 
 
 
