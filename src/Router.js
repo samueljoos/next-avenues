@@ -54,7 +54,7 @@ class Router {
      */
     setCtx(ctx, protocol = 'https') {
         this.ctx = ctx;
-        if (RouteStore._domains) {
+        if (this.domain === undefined && RouteStore._domains) {
             this.domain = RouteStore._domains.find((domain) => this.ctx.asPath.split('/')[0].split('_dot_').join('.') === domain );
             this.protocol = protocol;
         }
