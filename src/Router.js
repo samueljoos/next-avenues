@@ -49,10 +49,15 @@ class Router {
      * Set the context of your page. Only needed when you want to do a static next export
      * @function setCtx
      * @param {Object} ctx
+     * @param {string} protocol
      * @returns {void}
      */
-    setCtx(ctx) {
+    setCtx(ctx, protocol = 'https') {
         this.ctx = ctx;
+        if (RouteStore._domains) {
+            this.domain = RouteStore._domains.find((domain) => this.ctx.asPath.split('/')[0].split('_dot_').join('.') === domain );
+            this.protocol = protocol;
+        }
     }
 
     /**
@@ -78,7 +83,7 @@ class Router {
                                 pages[resolvedRoute.as.replace(/.*\:\/\//, '').split('.').join('_dot_')] = { page: resolvedRoute.href, query: params };
                             });
                         } else {
-                            const resolvedRoute = route.getNextLinkProps({}, { domain, protocol: this.protocol || 'http' }, true);
+                            const resolvedRoute = route.getNextLinkProps({}, { domain, protocol: this.protocol }, true);
                             pages[resolvedRoute.as.replace(/.*\:\/\//, '').split('.').join('_dot_')] = { page: resolvedRoute.href };
                         }
                     }));
