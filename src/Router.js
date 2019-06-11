@@ -74,7 +74,8 @@ class Router {
                 const pages = {};
 
                 await Promise.all([this.domain, ...RouteStore._domains].map(async(domain) => {
-                    await Promise.all(this.list().map(async(route) => {
+                    const filteredList = this.list().filter((route) => route._domain === domain);
+                    await Promise.all(filteredList.map(async(route) => {
                         if (route._keys.length && route._export) {
                             const exportParams = await route._export(route);
 
